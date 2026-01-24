@@ -1,54 +1,182 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro'; // Use your shell
+
+import { getCollection } from 'astro:content';
+const games = await getCollection('released-games');
+const uiStudies = await getCollection('ui-studies');
 ---
 
-<BaseLayout title="My Portfolio">
+<BaseLayout title="Andrée Burlamaqui - Portfolio">
   
-  <div class="landing-container">
-    <h1>Welcome</h1>
-    <p>I am a Game Programmer specializing in Unity and UI Engineering.</p>
+  <div class="main-container">
 
-    <div class="navigation-buttons">
-      <a href="/released-games" class="btn">
-        <h2>🎮 Released Games</h2>
-        <p>Check out my commercial projects and prototypes.</p>
-      </a>
-
-      <a href="/ui-studies" class="btn">
-        <h2>🎨 UI Engineering</h2>
-        <p>Technical breakdowns of user interfaces and systems.</p>
-      </a>
+    <aside class="sidebar">
+        <div class="profile">
+      <h1>Andrée Burlamaqui</h1>
+      <p>Award-winning game developer with 5+ years of experience and contributions to 10+ games</p>
+      <img src="/profile.jpg" alt="Photo of Andrée Burlamaqui" class="avatar" />
     </div>
+    </aside>
+
+    <main class="content-area">
+
+      <div class="tabs-header">
+        <button class="tab-btn active" data-target="tab-games">
+            Released Games
+        </button>
+        <button class="tab-btn" data-target="tab-ui">
+            UI Engineering
+        </button>
+
+        <div id="tab-games" class="tab-content active">
+        <div class="project-grid">
+          {games.map(game => (
+            <a href={`/released-games/${game.slug}`} class="project-card">
+              <div class="card-image" style={`background-image: url(${game.data.cover || '/placeholder.jpg'})`}></div>
+              <div class="card-info">
+                <h3>{game.data.title}</h3>
+                <span class="tag">{game.data.genre || 'Game'}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div id="tab-ui" class="tab-content">
+        <div class="project-grid">
+          {uiStudies.map(study => (
+            <a href={`/ui-studies/${study.slug}`} class="project-card">
+              <div class="card-image" style={`background-image: url(${study.data.cover || '/placeholder.jpg'})`}></div>
+              <div class="card-info">
+                <h3>{study.data.title}</h3>
+                <span class="tag">UI System</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      </div>
+
+    </main>
 
   </div>
 
 </BaseLayout>
 
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Remove 'active' from all buttons and contents
+      buttons.forEach(b => b.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+
+      // 2. Add 'active' to clicked button
+      btn.classList.add('active');
+
+      // 3. Show the correct content
+const targetId = btn.getAttribute('data-target');
+if (targetId) {
+  document.getElementById(targetId)?.classList.add('active');
+}
+    });
+  });
+</script>
+
 <style>
-  /* Simple styling to center everything */
-  .landing-container {
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .navigation-buttons {
+  /* --- LAYOUT --- */
+  .main-container {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    min-height: 100vh;
   }
 
-  .btn {
-    border: 1px solid #ccc;
-    padding: 2rem;
+  /* Sidebar Styling */
+  .sidebar {
+    width: 25%;
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    background: #f8f9fa;
+    border-right: 1px solid #eee;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .avatar { border-radius: 50%; margin-bottom: 1rem; width: 120px; height: 120px; object-fit: cover; }
+  .role { color: #666; line-height: 1.4; }
+
+  /* Content Area Styling */
+  .content-area {
+    margin-left: 25%; /* Matches sidebar width */
+    width: 75%;
+    padding: 3rem 4rem;
+  }
+
+  /* --- TABS --- */
+  .tabs-header {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    cursor: pointer;
+    color: #888;
+    position: relative;
+    top: 2px; /* Alignment trick */
+  }
+
+  .tab-btn:hover { color: #444; }
+
+  /* The Active Tab Style */
+  .tab-btn.active {
+    color: #000;
+    border-bottom: 2px solid #000; /* Black line under active tab */
+  }
+
+  /* --- TOGGLE LOGIC --- */
+  .tab-content { display: none; } /* Hide by default */
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- GRID --- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive Grid */
+    gap: 2rem;
+  }
+
+  .project-card {
     text-decoration: none;
     color: inherit;
-    border-radius: 8px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
     transition: transform 0.2s;
   }
 
-  .btn:hover {
-    transform: translateY(-5px); /* Little "hover" animation */
-    background-color: #f0f0f0;
+  .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+  .card-image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    background-color: #ddd;
   }
+
+  .card-info { padding: 1rem; }
+  .tag { font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; color: #555; }
 </style>
