@@ -1,17 +1,54 @@
 ---
-
+import BaseLayout from '../layouts/base-layout.astro'; // Use your shell
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="My Portfolio">
+  
+  <div class="landing-container">
+    <h1>Welcome</h1>
+    <p>I am a Game Programmer specializing in Unity and UI Engineering.</p>
+
+    <div class="navigation-buttons">
+      <a href="/released-games" class="btn">
+        <h2>🎮 Released Games</h2>
+        <p>Check out my commercial projects and prototypes.</p>
+      </a>
+
+      <a href="/ui-studies" class="btn">
+        <h2>🎨 UI Engineering</h2>
+        <p>Technical breakdowns of user interfaces and systems.</p>
+      </a>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  /* Simple styling to center everything */
+  .landing-container {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    border: 1px solid #ccc;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-5px); /* Little "hover" animation */
+    background-color: #f0f0f0;
+  }
+</style>

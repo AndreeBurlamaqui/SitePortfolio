@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+// 1. IMPORT THIS TYPE
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const games = await getCollection('released-games');
+  const uiStudies = await getCollection('ui-studies');
+
+  const gameRoutes = games.map(entry => ({
+    params: { category: 'released-games', slug: entry.slug },
+    props: { entry },
+  }));
+
+  const uiRoutes = uiStudies.map(entry => ({
+    params: { category: 'ui-studies', slug: entry.slug },
+    props: { entry },
+  }));
+
+  return [...gameRoutes, ...uiRoutes];
+}
+
+// 2. DEFINE THE TYPE FOR YOUR PROPS
+// This tells TS: "The 'entry' prop can be a Game OR a UI Study"
+type Props = {
+  entry: CollectionEntry<'released-games'> | CollectionEntry<'ui-studies'>;
+};
+
+// 3. APPLY THE TYPE
+const { entry } = Astro.props as Props;
+const { Content } = await entry.render();
+---
+
+<article>
+  <h1>{entry.data.title}</h1>
+  <Content />
+</article>
