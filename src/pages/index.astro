@@ -10,14 +10,6 @@ const uiStudies = await getCollection('ui-studies');
   
   <div class="main-container">
 
-    <aside class="sidebar">
-        <div class="profile">
-      <h1>Andrée Burlamaqui</h1>
-      <p>Award-winning game developer with 5+ years of experience and contributions to 10+ games</p>
-      <img src="/profile.jpg" alt="Photo of Andrée Burlamaqui" class="avatar" />
-    </div>
-    </aside>
-
     <main class="content-area">
 
       <div class="tabs-header">
@@ -112,34 +104,6 @@ if (targetId) {
 </script>
 
 <style>
-  /* --- LAYOUT --- */
-  .main-container {
-    display: flex;
-    min-height: 100vh;
-  }
-
-  /* Sidebar Styling */
-  .sidebar {
-    width: 25%;
-    position: fixed;
-    top: 0; bottom: 0; left: 0;
-    background: #f8f9fa;
-    border-right: 1px solid #eee;
-    padding: 3rem 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .avatar { border-radius: 50%; margin-bottom: 1rem; width: 120px; height: 120px; object-fit: cover; }
-  .role { color: #666; line-height: 1.4; }
-
-  /* Content Area Styling */
-  .content-area {
-    margin-left: 25%; /* Matches sidebar width */
-    width: 75%;
-    padding: 3rem 4rem;
-  }
-
   /* --- TABS --- */
   .tabs-header {
     display: flex;

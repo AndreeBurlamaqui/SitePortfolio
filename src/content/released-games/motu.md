@@ -1,5 +1,5 @@
 ---
-title: "Masters of the Universe"
+title: "MOTU: Guardians of Grayskull™"
 category: "Released" 
 cover: "/images/motu-cover.jpg"
 engine: "Unity"
