@@ -35,7 +35,34 @@ const uiStudies = await getCollection('ui-studies');
               <div class="card-image" style={`background-image: url(${game.data.cover || '/placeholder.jpg'})`}></div>
               <div class="card-info">
                 <h3>{game.data.title}</h3>
-                <span class="tag">{game.data.genre || 'Game'}</span>
+                {game.data.genre &&( 
+                <span class="tag">{game.data.genre}</span>
+                )}
+                {game.data.engine && (
+                <span class="tag">{game.data.engine}</span>
+                )}
+                {game.data.itchUrl && (
+      <span class="tag">
+        <i class="fa-brands fa-steam"></i> Itch
+      </span>
+    )}
+                {game.data.steamUrl && (
+      <span class="tag">
+        <i class="fa-brands fa-steam"></i> Steam
+      </span>
+    )}
+
+    {game.data.googlePlayUrl && (
+      <span class="tag">
+        <i class="fa-brands fa-google-play"></i> Google Play
+      </span>
+    )}
+
+    {game.data.applePlayUrl && (
+      <span class="tag">
+        <i class="fa-brands fa-apple"></i> App Store
+      </span>
+    )}
               </div>
             </a>
           ))}
@@ -49,7 +76,7 @@ const uiStudies = await getCollection('ui-studies');
               <div class="card-image" style={`background-image: url(${study.data.cover || '/placeholder.jpg'})`}></div>
               <div class="card-info">
                 <h3>{study.data.title}</h3>
-                <span class="tag">UI System</span>
+                <span class="tag">{study.data.techStack || 'UI Study'}</span>
               </div>
             </a>
           ))}
@@ -65,25 +92,24 @@ const uiStudies = await getCollection('ui-studies');
 </BaseLayout>
 
 <script>
+    // Tabs
   const buttons = document.querySelectorAll('.tab-btn');
   const contents = document.querySelectorAll('.tab-content');
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      // 1. Remove 'active' from all buttons and contents
       buttons.forEach(b => b.classList.remove('active'));
       contents.forEach(c => c.classList.remove('active'));
 
-      // 2. Add 'active' to clicked button
       btn.classList.add('active');
 
-      // 3. Show the correct content
 const targetId = btn.getAttribute('data-target');
 if (targetId) {
   document.getElementById(targetId)?.classList.add('active');
 }
     });
   });
+
 </script>
 
 <style>
