@@ -1,27 +1,34 @@
 import { z, defineCollection } from 'astro:content';
 
-// 1. Define the schema for "Games"
-const gamesCollection = defineCollection({
-  type: 'content', 
-  schema: z.object({
-    title: z.string(),
-    genre: z.string(), // e.g., "RPG", "Action"
-    cover: z.string(),
-  }),
+const baseSchema = z.object({
+  title: z.string(),
+  cover: z.string().optional(),
+  description: z.string().optional(),
+  engine: z.string().optional(),
 });
 
-// 2. Define the schema for "UI Studies" (You can have different fields here!)
-const uiCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    techStack: z.string(), // e.g., "Unity UI Toolkit", "ImGUI"
-    videoUrl: z.string().optional(),
-  }),
+const gameSchema = baseSchema.extend({
+  genre: z.string(),
+
+  // Where to play links
+  itchUrl: z.string().url().optional(),
+  googlePlayUrl: z.string().url().optional(),
+  applePlayUrl: z.string().url().optional(),
+  steamUrl: z.string().url().optional(),
 });
 
-// 3. Export them to make them available
+const uiSchema = baseSchema.extend({
+  techStack: z.string(), // ImGUI, UITK, UMG, etc.
+});
+
 export const collections = {
-  'released-games': gamesCollection,      // Looks in src/content/games
-  'ui-studies': uiCollection,    // Looks in src/content/ui-studies
+  'released-games': defineCollection({ 
+    type: 'content', 
+    schema: gameSchema 
+  }),
+  
+  'ui-studies': defineCollection({ 
+    type: 'content', 
+    schema: uiSchema 
+  }),
 };
