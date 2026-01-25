@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro'; // Use your shell
+import '../styles/global.css';
 
 import { getCollection } from 'astro:content';
 const games = await getCollection('released-games');
@@ -16,8 +17,11 @@ const uiStudies = await getCollection('ui-studies');
         <button class="tab-btn active" data-target="tab-games">
             Released Games
         </button>
+        <button class="tab-btn active" data-target="tab-prototypes">
+            Prototypes
+        </button>
         <button class="tab-btn" data-target="tab-ui">
-            UI Engineering
+            UI Studies
         </button>
       </div>
 
@@ -27,13 +31,12 @@ const uiStudies = await getCollection('ui-studies');
             <a href={`/released-games/${game.slug}`} class="project-card">
               <div class="card-image" style={`background-image: url(${game.data.cover || '/placeholder.jpg'})`}></div>
               <div class="card-info">
+
                 <h3>{game.data.title}</h3>
-                {game.data.genre && ( 
-                <span class="tag">{game.data.genre}</span>
-                )}
                 {game.data.engine && (
                 <span class="tag">{game.data.engine}</span>
                 )}
+
                 {game.data.itchUrl && (
       <span class="tag">
         <i class="fa-brands fa-steam"></i> Itch
@@ -69,7 +72,15 @@ const uiStudies = await getCollection('ui-studies');
               <div class="card-image" style={`background-image: url(${study.data.cover || '/placeholder.jpg'})`}></div>
               <div class="card-info">
                 <h3>{study.data.title}</h3>
-                <span class="tag">{study.data.techStack || 'UI Study'}</span>
+
+                {study.data.engine && (
+                <span class="tag">{study.data.engine}</span>
+                )}
+
+                {study.data.techStack && (
+                <span class="tag">{study.data.techStack}</span>
+                )}
+
               </div>
             </a>
           ))}
@@ -167,12 +178,5 @@ if (targetId) {
   }
 
   .card-info { padding: 1rem; }
-  .tag { 
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; color: #555; 
-    margin-top: 0.35rem;
-    white-space: nowrap;
-    flex-shrink: 0;
-    }
+
 </style>
