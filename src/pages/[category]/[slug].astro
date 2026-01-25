@@ -9,6 +9,7 @@ import TechTags from '../../components/tech-tags.astro';
 export async function getStaticPaths() {
   const games = await getCollection('released-games');
   const uiStudies = await getCollection('ui-studies');
+  const prototypes = await getCollection('prototypes');
 
   const gameRoutes = games.map(entry => ({
     params: { category: 'released-games', slug: entry.slug },
@@ -20,7 +21,12 @@ export async function getStaticPaths() {
     props: { entry },
   }));
 
-  return [...gameRoutes, ...uiRoutes];
+    const prototypeRoutes = prototypes.map(entry => ({
+    params: { category: 'prototypes', slug: entry.slug },
+    props: { entry },
+  }));
+
+  return [...gameRoutes, ...uiRoutes, ...prototypeRoutes];
 }
 
 // General data of the entry

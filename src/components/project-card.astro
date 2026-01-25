@@ -1,0 +1,75 @@
+---
+import TechTags from './tech-tags.astro';
+
+const { entry, basePath } = Astro.props;
+const { data, slug } = entry;
+---
+
+<a href={`${basePath}/${slug}`} class="project-card">
+  <div class="card-image" style={`background-image: url(${data.cover})`}></div>
+  
+  <div class="card-info">
+    <h3>{data.title}</h3>
+
+    <TechTags rawTechStack={[
+      data.engine,
+      data.language,
+      data.role,
+      data.importantTechStack
+    ]}/>
+
+    <div class="store-icons">
+      {data.itchUrl && <i class="fa-brands fa-itch-io" title="Itch.io"></i>}
+      {data.steamUrl && <i class="fa-brands fa-steam" title="Steam"></i>}
+      {data.googlePlayUrl && <i class="fa-brands fa-google-play" title="Google Play"></i>}
+      {data.applePlayUrl && <i class="fa-brands fa-apple" title="App Store"></i>}
+    </div>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%; /* Ensures all cards in a row match height */
+  }
+
+  .project-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08); 
+  }
+
+  .card-image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card-info { 
+    padding: 1rem; 
+    flex-grow: 1; /* Pushes content to fill space */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; }
+
+  .store-icons {
+    margin-top: auto; /* Pushes icons to the bottom */
+    display: flex;
+    gap: 0.8rem;
+    color: #666;
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+  }
+</style>

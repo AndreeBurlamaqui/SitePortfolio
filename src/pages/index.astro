@@ -1,11 +1,35 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro'; // Use your shell
 import '../styles/global.css';
-import TechTags from '../components/tech-tags.astro';
-
+import ProjectCard from '../components/project-card.astro';
 import { getCollection } from 'astro:content';
-const games = await getCollection('released-games');
+
+// Fetch project pages
+const releasedGames = await getCollection('released-games');
 const uiStudies = await getCollection('ui-studies');
+const prototypes = await getCollection('prototypes');
+
+// Create tabs data
+const tabs = [
+  { 
+    id: 'tab-games', 
+    label: 'Released Games', 
+    items: releasedGames,
+    basePath: 'released-games'
+  },
+  { 
+    id: 'tab-prototypes', 
+    label: 'Prototypes', 
+    items: prototypes,
+    basePath: 'prototypes'
+  },
+  { 
+    id: 'tab-ui', 
+    label: 'UI Studies', 
+    items: uiStudies,
+    basePath: 'ui-studies' 
+  }
+];
 ---
 
 <BaseLayout title="Andrée Burlamaqui - Portfolio">
@@ -15,76 +39,35 @@ const uiStudies = await getCollection('ui-studies');
     <main class="content-area">
 
       <div class="tabs-header">
-        <button class="tab-btn active" data-target="tab-games">
-            Released Games
-        </button>
-        <button class="tab-btn active" data-target="tab-prototypes">
-            Prototypes
-        </button>
-        <button class="tab-btn" data-target="tab-ui">
-            UI Studies
-        </button>
+        {tabs.map((tab, index) => (
+          <button 
+            class={`tab-btn ${index === 0 ? 'active' : ''}`} 
+            data-target={tab.id}
+          >
+            {tab.label}
+            <span class="count">{tab.items.length}</span>
+          </button>
+        ))}
       </div>
+      
+      {tabs.map((tab, index) => (
+        <div id={tab.id} class={`tab-content ${index === 0 ? 'active' : ''}`}>
+          
+          {tab.items.length > 0 ? (
+            <div class="project-grid">
+              {tab.items.map(entry => (
+                <ProjectCard entry={entry} basePath={tab.basePath} />
+              ))}
+            </div>
+          ) : (
+            /* Empty State Fallback */
+            <div class="empty-state">
+              <p>No projects in this category yet.</p>
+            </div>
+          )}
 
-        <div id="tab-games" class="tab-content active">
-        <div class="project-grid">
-          {games.map(game => (
-            <a href={`/released-games/${game.slug}`} class="project-card">
-              <div class="card-image" style={`background-image: url(${game.data.cover || '/placeholder.jpg'})`}></div>
-              <div class="card-info">
-
-                <h3>{game.data.title}</h3>
-
-                <TechTags rawTechStack={[
-                    game.data.engine,
-                    game.data.language,
-                    game.data.role,
-                    game.data.importantTechStack
-                    ]}/>
-
-                {game.data.itchUrl && (
-      <span class="tag">
-        <i class="fa-brands fa-steam"></i> Itch
-      </span>
-    )}
-                {game.data.steamUrl && (
-      <span class="tag">
-        <i class="fa-brands fa-steam"></i> Steam
-      </span>
-    )}
-
-    {game.data.googlePlayUrl && (
-      <span class="tag">
-        <i class="fa-brands fa-google-play"></i> Google Play
-      </span>
-    )}
-
-    {game.data.applePlayUrl && (
-      <span class="tag">
-        <i class="fa-brands fa-apple"></i> App Store
-      </span>
-    )}
-              </div>
-            </a>
-          ))}
         </div>
-      </div>
-
-      <div id="tab-ui" class="tab-content">
-        <div class="project-grid">
-          {uiStudies.map(study => (
-            <a href={`/ui-studies/${study.slug}`} class="project-card">
-              <div class="card-image" style={`background-image: url(${study.data.cover || '/placeholder.jpg'})`}></div>
-              <div class="card-info">
-                <h3>{study.data.title}</h3>
-
-                <TechTags rawTechStack={study.data.importantTechStack}/>
-
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
+      ))}
 
     </main>
 
@@ -104,10 +87,11 @@ const uiStudies = await getCollection('ui-studies');
 
       btn.classList.add('active');
 
-const targetId = btn.getAttribute('data-target');
-if (targetId) {
-  document.getElementById(targetId)?.classList.add('active');
-}
+      const targetId = btn.getAttribute('data-target');
+      
+      if (targetId) {
+        document.getElementById(targetId)?.classList.add('active');
+      }
     });
   });
 
@@ -177,5 +161,27 @@ if (targetId) {
   }
 
   .card-info { padding: 1rem; }
+
+  .count {
+    font-size: 0.8rem;
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+    color: #666;
+  }
+
+  .tab-btn.active .count {
+    background: #000;
+    color: #fff;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-style: italic;
+  }
 
 </style>

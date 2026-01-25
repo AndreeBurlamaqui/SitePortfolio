@@ -44,4 +44,9 @@ export const collections = {
     type: 'content', 
     schema: uiSchema 
   }),
+
+  'prototypes': defineCollection({ 
+    type: 'content', 
+    schema: gameSchema 
+  }),
 };
