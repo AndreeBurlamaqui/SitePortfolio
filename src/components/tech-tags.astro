@@ -1,11 +1,15 @@
 ---
+import '../styles/global.css';
+
 interface Props {
-  techStack: string[]; // Explicitly say this is an array of strings
+  rawTechStack: any[] | null | undefined;
 }
 
-const { techStack } = Astro.props;
-
-import '../styles/global.css';
+const { rawTechStack = [] } = Astro.props;
+// Ensure we only have valid, non-empty strings
+const techStack = (rawTechStack || []).filter(tech => 
+  typeof tech === 'string' && tech.trim() !== ''
+);
 ---
 
 {techStack && techStack.length > 0 && (
