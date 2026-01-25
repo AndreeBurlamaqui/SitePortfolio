@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro'; // Use your shell
 import '../styles/global.css';
+import TechTags from '../components/tech-tags.astro';
 
 import { getCollection } from 'astro:content';
 const games = await getCollection('released-games');
@@ -33,9 +34,8 @@ const uiStudies = await getCollection('ui-studies');
               <div class="card-info">
 
                 <h3>{game.data.title}</h3>
-                {game.data.engine && (
-                <span class="tag">{game.data.engine}</span>
-                )}
+
+                <TechTags techStack={game.data.importantTechStack}/>
 
                 {game.data.itchUrl && (
       <span class="tag">
@@ -73,13 +73,7 @@ const uiStudies = await getCollection('ui-studies');
               <div class="card-info">
                 <h3>{study.data.title}</h3>
 
-                {study.data.engine && (
-                <span class="tag">{study.data.engine}</span>
-                )}
-
-                {study.data.techStack && (
-                <span class="tag">{study.data.techStack}</span>
-                )}
+                <TechTags techStack={study.data.importantTechStack}/>
 
               </div>
             </a>

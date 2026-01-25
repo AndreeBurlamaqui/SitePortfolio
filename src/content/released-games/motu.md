@@ -8,8 +8,13 @@ engine: "Unity"
 slug: "motu"
 googlePlayUrl: "https://play.google.com/store/apps/details?id=com.Mattel.GuardiansOfGrayskull"
 role: "Lead Programmer"
-studio: "Hopscotch Games"
-language: "C#"
+importantTechStack: 
+    - "Unity"
+    - "C#"
+extraTechStack:
+    - "Hopscotch Games" # Studio
+    - "Firebase" # Most important backend
+    - "Beamable" # Cloudsaving and login backend
 ---
 # Masters of the Universe
 Here is the description of the game...

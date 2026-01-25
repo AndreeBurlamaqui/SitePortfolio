@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/base-layout.astro';
 import '../../styles/global.css';
 import StoreButtons from '../../components/store-buttons.astro';
 import SmartVideo from '../../components/smart-video.astro';
+import TechTags from '../../components/tech-tags.astro';
 
 export async function getStaticPaths() {
   const games = await getCollection('released-games');
@@ -50,11 +51,8 @@ const { Content } = await entry.render();
       <div class="game-about">
 
         <div class="meta-info">
-          {entry.data.engine && (
-            <span class="tag">{entry.data.engine}</span>
-          )}
 
-          <span class="tag">{entry.data.language}</span>
+          <TechTags techStack={[...entry.data.importantTechStack, ...entry.data.extraTechStack]}/>
 
           {'studio' in entry.data && (
             <span class="tag">{entry.data.studio}</span>

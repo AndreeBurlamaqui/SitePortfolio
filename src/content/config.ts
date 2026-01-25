@@ -3,10 +3,11 @@ import { z, defineCollection } from 'astro:content';
 const baseSchema = z.object({
   title: z.string(),
   description: z.string(),
-  engine: z.string(),
-  language: z.string(),
-
   cover: z.string().optional(),
+
+  importantTechStack: z.array(z.string()), // Language, Engine, UI Specifics (ImGUI, UITK, UMG), etc.
+  extraTechStack: z.array(z.string()), // Studio, Specific Tools (Blender, Figma, PlayFab, etc.), etc.
+
 //   backgroundClip: z.string().optional(), TODO: Make a background keep running behind title
 });
 
@@ -23,7 +24,8 @@ const gameSchema = baseSchema.extend({
 });
 
 const uiSchema = baseSchema.extend({
-  techStack: z.string().optional(), // ImGUI, UITK, UMG, etc.
+  
+    
 });
 
 export const collections = {

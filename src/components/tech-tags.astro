@@ -1,0 +1,17 @@
+---
+interface Props {
+  techStack: string[]; // Explicitly say this is an array of strings
+}
+
+const { techStack } = Astro.props;
+
+import '../styles/global.css';
+---
+
+{techStack && techStack.length > 0 && (
+  <div class="tech-stack-wrapper">
+    {techStack.map((tech) => (
+      <span class="tag">{tech}</span>
+    ))}
+  </div>
+)}
