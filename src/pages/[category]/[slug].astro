@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/base-layout.astro';
 import '../../styles/global.css';
 import StoreButtons from '../../components/store-buttons.astro';
+import SmartVideo from '../../components/smart-video.astro';
 
 export async function getStaticPaths() {
   const games = await getCollection('released-games');
@@ -34,6 +35,17 @@ const { Content } = await entry.render();
       <h1>{entry.data.title}</h1>
       <p style="justify-content: center; text-align: center;">{entry.data.description}</p>
       <StoreButtons data = {entry.data}/>
+
+      <hr>
+
+    <!-- IN CASE WE WANT TO SHOW COVER TOO
+      {entry.data.cover && (
+      <div class="hero-image">
+        <img src={entry.data.cover} alt={`Art of ${entry.data.title}`} />
+      </div>
+    )} -->
+
+    <SmartVideo data={entry.data} />
 
       <div class="game-about">
 

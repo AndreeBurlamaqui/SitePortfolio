@@ -7,12 +7,13 @@ const baseSchema = z.object({
   language: z.string(),
 
   cover: z.string().optional(),
-  trailer: z.string().optional(),
+//   backgroundClip: z.string().optional(), TODO: Make a background keep running behind title
 });
 
 const gameSchema = baseSchema.extend({
   role: z.string().optional(),
   studio: z.string().optional(),
+  trailerId: z.string().optional(), // Must always be /embed/
 
   // Where to play links
   itchUrl: z.string().url().optional(),
