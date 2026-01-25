@@ -2,13 +2,17 @@ import { z, defineCollection } from 'astro:content';
 
 const baseSchema = z.object({
   title: z.string(),
+  description: z.string(),
+  engine: z.string(),
+  language: z.string(),
+
   cover: z.string().optional(),
-  description: z.string().optional(),
-  engine: z.string().optional(),
+  trailer: z.string().optional(),
 });
 
 const gameSchema = baseSchema.extend({
-  genre: z.string(),
+  role: z.string().optional(),
+  studio: z.string().optional(),
 
   // Where to play links
   itchUrl: z.string().url().optional(),
@@ -18,7 +22,7 @@ const gameSchema = baseSchema.extend({
 });
 
 const uiSchema = baseSchema.extend({
-  techStack: z.string(), // ImGUI, UITK, UMG, etc.
+  techStack: z.string().optional(), // ImGUI, UITK, UMG, etc.
 });
 
 export const collections = {
