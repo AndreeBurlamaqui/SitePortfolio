@@ -1,6 +1,8 @@
 ---
 title: "MOTU: Guardians of Grayskull™"
-description: "Game hundred enemies"
+description: "3D Bullet Heaven (Inverse Bullet Hell) inspired by the Masters of the Universe™ franchise. Face relentless waves of minions in fast-paced Vampire Survivors-style sessions featuring deep roguelite progression, character customization, and boss battles."
+timeFrame: "From Jan 2024 to Jan 2026"
+status: "Soft-launched and cancelled"
 category: "Released" 
 cover: "/cover/motu-cover.webp"
 trailerId: "jxx7PjNTibQ"
@@ -15,6 +17,8 @@ extraTechStack:
     - "Hopscotch Games" # Studio
     - "Firebase" # Most important backend
     - "Beamable" # Cloudsaving and login backend
+    - "Addressables"
+    - "Jobs System"
 ---
 # Masters of the Universe
-Here is the description of the game...
+My contribution was basically on everything

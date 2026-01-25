@@ -2,8 +2,13 @@ import { z, defineCollection } from 'astro:content';
 
 const baseSchema = z.object({
   title: z.string(),
-  description: z.string(),
+  description: z.string().optional(),
+  
   cover: z.string().optional(),
+  
+  timeFrame: z.string(), // Year or Range
+  role: z.string(), // Solo or specific roles
+  status: z.string(), // Released, In Development, Abandoned, etc.
 
   importantTechStack: z.array(z.string()), // Language, Engine, UI Specifics (ImGUI, UITK, UMG), etc.
   extraTechStack: z.array(z.string()), // Studio, Specific Tools (Blender, Figma, PlayFab, etc.), etc.
@@ -12,8 +17,6 @@ const baseSchema = z.object({
 });
 
 const gameSchema = baseSchema.extend({
-  role: z.string().optional(),
-  studio: z.string().optional(),
   trailerId: z.string().optional(), // Must always be /embed/
 
   // Where to play links
