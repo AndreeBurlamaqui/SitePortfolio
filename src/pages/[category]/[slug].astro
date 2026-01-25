@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/base-layout.astro';
+import '../../styles/global.css';
+import StoreButtons from '../../components/store-buttons.astro';
 
 export async function getStaticPaths() {
   const games = await getCollection('released-games');
@@ -19,18 +21,114 @@ export async function getStaticPaths() {
   return [...gameRoutes, ...uiRoutes];
 }
 
-// 2. DEFINE THE TYPE FOR YOUR PROPS
-// This tells TS: "The 'entry' prop can be a Game OR a UI Study"
-type Props = {
-  entry: CollectionEntry<'released-games'> | CollectionEntry<'ui-studies'>;
-};
-
-// 3. APPLY THE TYPE
-const { entry } = Astro.props as Props;
+// General data of the entry
+const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<article>
-  <h1>{entry.data.title}</h1>
-  <Content />
-</article>
+<BaseLayout title={`${entry.data.title} - Andrée Burlamaqui`}>
+  
+  <article class="game-container">
+    
+    <header class="game-header">
+      <h1>{entry.data.title}</h1>
+      <p style="justify-content: center; text-align: center;">{entry.data.description}</p>
+      <StoreButtons data = {entry.data}/>
+
+      <div class="game-about">
+
+        <div class="meta-info">
+          {entry.data.engine && (
+            <span class="tag">{entry.data.engine}</span>
+          )}
+
+          <span class="tag">{entry.data.language}</span>
+
+          {'studio' in entry.data && (
+            <span class="tag">{entry.data.studio}</span>
+          )}
+
+        </div>
+
+        {'role' in entry.data && (
+          <p>Worked as: {entry.data.role}</p>
+        )}
+
+      </div>
+    </header>
+
+    {entry.data.cover && (
+      <div class="hero-image">
+        <img src={entry.data.cover} alt={`Cover art for ${entry.data.title}`} />
+      </div>
+    )}
+
+    <div class="content-body">
+      <Content />
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+  /* LAYOUT CONTAINER */
+  .game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+  }
+
+  /* HEADER */
+  .game-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .game-about {
+    margin: auto;
+    margin-top: 10px;
+    padding-top: 5px;
+    line-height: 1.5;
+    border: 2px solid #b6b6b6;
+    border-radius: 8px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    width: 75%;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+    line-height: 1.1;
+  }
+
+  /* HERO IMAGE */
+  .hero-image {
+    width: 100%;
+    margin-bottom: 3rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+  
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+  /* MARKDOWN CONTENT STYLES */
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+  }
+  
+  /* Make embedded images in markdown responsive */
+  .content-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+</style>
