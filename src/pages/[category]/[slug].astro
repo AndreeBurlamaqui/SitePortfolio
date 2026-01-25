@@ -57,12 +57,6 @@ const { Content } = await entry.render();
       </div>
     </header>
 
-    {entry.data.cover && (
-      <div class="hero-image">
-        <img src={entry.data.cover} alt={`Cover art for ${entry.data.title}`} />
-      </div>
-    )}
-
     <div class="content-body">
       <Content />
     </div>

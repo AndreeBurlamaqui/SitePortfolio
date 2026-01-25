@@ -2,7 +2,7 @@
 title: "MOTU: Guardians of Grayskull™"
 description: "Game hundred enemies"
 category: "Released" 
-cover: "/images/motu-cover.jpg"
+cover: "/cover/motu-cover.webp"
 engine: "Unity"
 slug: "motu"
 googlePlayUrl: "https://play.google.com/store/apps/details?id=com.Mattel.GuardiansOfGrayskull"
