@@ -7,8 +7,9 @@ interface Props {
 
 const { rawTechStack = [] } = Astro.props;
 // Ensure we only have valid, non-empty strings
-const techStack = (rawTechStack || []).filter(tech => 
-  typeof tech === 'string' && tech.trim() !== ''
+const techStack = (rawTechStack || [])
+  .flat() // Unpack nested arrays if any
+  .filter(tech => typeof tech === 'string' && tech.trim() !== '' // Remove any invalid entries
 );
 ---
 
