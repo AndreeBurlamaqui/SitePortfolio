@@ -1,0 +1,62 @@
+---
+const { data } = Astro.props;
+---
+
+<section>
+<div class="card-badges">
+
+    {data.itchUrl && (
+      <a href={data.itchUrl} target="_blank" class="badge-circle" aria-label="Play on Itch.io">
+        <i class="fa-brands fa-itch-io"></i>
+      </a>
+    )}
+    
+    {data.steamUrl && (
+      <a href={data.steamUrl} target="_blank" class="badge-circle" aria-label="View on Steam">
+        <i class="fa-brands fa-steam"></i>
+      </a>
+    )}
+
+    {data.googlePlayUrl && (
+      <a href={data.googlePlayUrl} target="_blank" class="badge-circle" aria-label="Get it on Google Play">
+        <i class="fa-brands fa-google-play"></i>
+      </a>
+    )}
+
+    {data.applePlayUrl && (
+      <a href={data.applePlayUrl} target="_blank" class="badge-circle" aria-label="Download on App Store">
+        <i class="fa-brands fa-apple"></i>
+      </a>
+    )}
+    </div>
+</section>
+
+<style>
+
+.card-badges {
+    justify-content: center;
+    display:grid;
+    flex-direction: column;
+}
+
+.badge-circle {
+  width: 48px;
+  height: 48px;
+  background: rgba(217, 211, 219, 0.75);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(119, 94, 148);
+  font-size: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.25s;
+  text-decoration: none !important;
+}
+
+.badge-circle:hover {
+  background: rgba(57, 57, 65, 0.4);
+  color: rgb(164, 138, 194);
+}
+
+</style>
