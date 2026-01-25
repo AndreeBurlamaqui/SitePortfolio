@@ -9,9 +9,12 @@ const baseSchema = z.object({
   timeFrame: z.string(), // Year or Range
   role: z.string(), // Solo or specific roles
   status: z.string(), // Released, In Development, Abandoned, etc.
+  engine: z.string(), // Unity, Unreal, Godot, Custom, etc.
+  language: z.string(), // C#, C++, GDScript, etc.
+  studio: z.string().optional(), // Company or Team name
 
-  importantTechStack: z.array(z.string()), // Language, Engine, UI Specifics (ImGUI, UITK, UMG), etc.
-  extraTechStack: z.array(z.string()), // Studio, Specific Tools (Blender, Figma, PlayFab, etc.), etc.
+  importantTechStack: z.array(z.string()).optional(), // Shown on card, useful for UI (ImGUI, UITK, UMG)
+  extraTechStack: z.array(z.string()).optional(), // Shown on page useful for tools (Blender, Figma, PlayFab, etc.)
 
 //   backgroundClip: z.string().optional(), TODO: Make a background keep running behind title
 });

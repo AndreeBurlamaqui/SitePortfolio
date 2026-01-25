@@ -35,7 +35,12 @@ const uiStudies = await getCollection('ui-studies');
 
                 <h3>{game.data.title}</h3>
 
-                <TechTags techStack={game.data.importantTechStack}/>
+                <TechTags rawTechStack={[
+                    game.data.engine,
+                    game.data.language,
+                    game.data.role,
+                    game.data.importantTechStack
+                    ]}/>
 
                 {game.data.itchUrl && (
       <span class="tag">
@@ -73,7 +78,7 @@ const uiStudies = await getCollection('ui-studies');
               <div class="card-info">
                 <h3>{study.data.title}</h3>
 
-                <TechTags techStack={study.data.importantTechStack}/>
+                <TechTags rawTechStack={study.data.importantTechStack}/>
 
               </div>
             </a>

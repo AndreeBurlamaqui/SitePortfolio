@@ -39,29 +39,29 @@ const { Content } = await entry.render();
 
       <hr>
 
-    <!-- IN CASE WE WANT TO SHOW COVER TOO
-      {entry.data.cover && (
-      <div class="hero-image">
-        <img src={entry.data.cover} alt={`Art of ${entry.data.title}`} />
-      </div>
-    )} -->
-
     <SmartVideo data={entry.data} />
 
       <div class="game-about">
-
-            <div>
-              <p>Contribution</p>
-              <span class="tag">{entry.data.role}</span>
-              <span class="tag">{entry.data.timeFrame}</span>
-              <span class="tag">{entry.data.status}</span>
+        <div class="about-header-grid">
+            <div class="about-box contribution">
+              <span class="tag">Role: {entry.data.role}</span>
+              <span class="tag">Time Frame: {entry.data.timeFrame}</span>
+              <span class="tag">Status: {entry.data.status}</span>
             </div>
 
-            <div>
-              <p>Tech Stack</p>
-              <TechTags techStack={[...(entry.data.importantTechStack ?? []), ...(entry.data.extraTechStack ?? [])]} />
+            <div class="about-box tech-stack">
+              <span class="tag">Engine: {entry.data.engine}</span>
+              <span class="tag">Language: {entry.data.language}</span>
+              <span class="tag">Studio: {entry.data.studio}</span>
             </div>
+          </div>
 
+          <div class="about-details">
+            <TechTags rawTechStack={[
+              ...(entry.data.importantTechStack ?? []),
+              ...(entry.data.extraTechStack ?? [])
+            ]} />
+          </div>
       </div>
     </header>
 
@@ -99,7 +99,7 @@ const { Content } = await entry.render();
     width: 75%;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1.5rem;
     margin-bottom: 2rem;
   }
@@ -109,22 +109,6 @@ const { Content } = await entry.render();
     margin: 0.5rem 0;
     line-height: 1.1;
   }
-
-  /* HERO IMAGE */
-  .hero-image {
-    width: 100%;
-    margin-bottom: 3rem;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  }
-  
-  .hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
 
   /* MARKDOWN CONTENT STYLES */
   .content-body {
@@ -140,4 +124,39 @@ const { Content } = await entry.render();
     border-radius: 8px;
   }
 
+  .about-header-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 1.5rem;
+  }
+
+  .about-box {
+    background: #f9f9f9; /* Subtle light background */
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #eee;
+  }
+
+  .about-box h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 1px;
+  }
+
+  .about-details {
+    padding: 0 0.5rem; /* Slight indent so tags align with boxes */
+  }
+
+  /* Responsive Fix for Mobile */
+  @media (max-width: 600px) {
+    .about-header-grid {
+      grid-template-columns: 1fr; /* Stack boxes on small screens */
+    }
+    .game-about {
+      width: 100%;
+    }
+  }
 </style>
