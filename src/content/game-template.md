@@ -2,7 +2,7 @@
 # --- CORE INFORMATION ---
 title: "Project Name"
 description: "A short, punchy description of the project (SEO and card preview)."
-cover: "/images/projects/project-cover.webp" # Path to your image in /public
+cover: "/cover/cover-image.webp" # Path to your image in /public
 
 # --- METADATA ---
 timeFrame: "2024 - 2025"
