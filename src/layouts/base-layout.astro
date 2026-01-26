@@ -8,7 +8,7 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title> 
@@ -21,8 +21,13 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
       <h1>Andrée Burlamaqui</h1>
 
       <div class="sidebar-footer">
-           <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-           <a href="#"><i class="fa-brands fa-github"></i></a>
+           <a href="https://www.linkedin.com/in/burlamaqui/" target="_blank"><i class="fa-brands fa-square-linkedin"></i></a>
+           <a href="https://github.com/AndreeBurlamaqui" target="_blank"><i class="fa-brands fa-square-github"></i></a>
+           <a href="https://x.com/umdree_" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+           <a href="https://www.artstation.com/burlamaqui" class="fa-stack small" target="_blank">
+              <i class="fa-solid fa-square fa-stack-2x"></i>
+              <i class="fa-brands fa-artstation fa-stack-1x fa-inverse"></i>
+          </a>
         </div>
 
       <p>Award-winning game developer with 5+ years of experience and contributions to 10+ games</p>
@@ -108,10 +113,12 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
 
   /* Footer Icons */
   .sidebar-footer {
-    margin-top: auto; /* Pushes to bottom */
-    display: flex;
-    gap: 1rem;
-    font-size: 1.5rem;
+    display: inline-flex;
+    flex-direction: row;
+    margin-top: auto;
+    gap: 0.5rem;
+    font-size: 2rem;
+    justify-content: left;
   }
   .sidebar-footer a { color: #888; transition: color 0.2s; }
   .sidebar-footer a:hover { color: #000; }
@@ -122,5 +129,12 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
     width: 75%;
     padding: 3rem 4rem;
     box-sizing: border-box;
+  }
+
+    .fa-stack.small {
+    font-size: 0.5em;
+    justify-items: center;
+    align-items: center;
+    margin-top: 0.11em;
   }
 </style>
