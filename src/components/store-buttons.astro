@@ -34,6 +34,13 @@ const { data } = Astro.props;
         <i class="fa-brands fa-github"></i>
       </a>
     )}
+
+            {data.websiteUrl && (
+      <a href={data.websiteUrl} target="_blank" class="badge-circle" aria-label="Website">
+        <i class="fa-solid fa-globe"></i>
+      </a>
+      )}
+
     </div>
 </section>
 

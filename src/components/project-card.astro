@@ -22,9 +22,10 @@ const { data, slug } = entry;
 <div class="card-info">
     
     <TechTags rawTechStack={[
-        data.engine,
+      data.engine,
       data.language,
-      data.importantTechStack
+      data.importantTechStack,
+      data.githubUrl && "OSS"
     ]}/>
 
 <hr style="margin-top: auto">
@@ -35,7 +36,7 @@ const { data, slug } = entry;
                 {data.steamUrl && <i class="fa-brands fa-steam" title="Steam"></i>}
                 {data.googlePlayUrl && <i class="fa-brands fa-google-play" title="Google Play"></i>}
                 {data.applePlayUrl && <i class="fa-brands fa-apple" title="App Store"></i>}
-                {data.websiteUrl || (data.importantTechStack && data.importantTechStack.includes("WebGL")) &&
+                {data.importantTechStack && data.importantTechStack.includes("WebGL") &&
                 <i class="fa-solid fa-globe" title="WebGL"></i>}
                 {data.importantTechStack && data.importantTechStack.includes("PC") &&
                 <i class="fa-solid fa-desktop" title="PC"></i>}
