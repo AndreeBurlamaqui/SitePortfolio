@@ -28,6 +28,12 @@ const { data } = Astro.props;
         <i class="fa-brands fa-apple"></i>
       </a>
     )}
+
+        {data.githubUrl && (
+      <a href={data.githubUrl} target="_blank" class="badge-circle" aria-label="GitHub Repository">
+        <i class="fa-brands fa-github"></i>
+      </a>
+    )}
     </div>
 </section>
 
@@ -35,8 +41,8 @@ const { data } = Astro.props;
 
 .card-badges {
     justify-content: center;
-    display:grid;
-    flex-direction: column;
+    display:flex;
+    gap: 1rem;
 }
 
 .badge-circle {

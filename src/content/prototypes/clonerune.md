@@ -22,6 +22,7 @@ extraTechStack:
   - "Scriptable Object Based"
 
 itchUrl: "https://burlamaqui.itch.io/clonerune"
+githubUrl: "https://github.com/AndreeBurlamaqui/Deltarune_CombatSystem"
 ---
 
 ## About the Project
