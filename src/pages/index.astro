@@ -2,12 +2,14 @@
 import BaseLayout from '../layouts/base-layout.astro'; // Use your shell
 import '../styles/global.css';
 import ProjectCard from '../components/project-card.astro';
-import { getCollection } from 'astro:content';
+import { getSortedProjects } from '../utils/projects';
 
-// Fetch project pages
-const releasedGames = await getCollection('released-games');
-const uiStudies = await getCollection('ui-studies');
-const prototypes = await getCollection('prototypes');
+// Fetch all collections in one go (Parallel loading)
+const [releasedGames, uiStudies, prototypes] = await Promise.all([
+  getSortedProjects('released-games'),
+  getSortedProjects('ui-studies'),
+  getSortedProjects('prototypes')
+]);
 
 // Create tabs data
 const tabs = [

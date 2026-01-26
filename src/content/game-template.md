@@ -5,7 +5,9 @@ description: "A short, punchy description of the project (SEO and card preview).
 cover: "/cover/cover-image.webp" # Path to your image in /public
 
 # --- METADATA ---
-timeFrame: "2024 - 2025"
+timeFrame: "2024 - 2025"          # User-friendly time frame
+sortDate: 2026-01-26              # What the code uses to sort
+
 role: "Programmer"          # e.g. Solo, Lead Dev, UI Engineer
 status: "Released"               # Released, In Development, Shelved, Cancelled
 engine: "Unity"                  # Unity, Unreal, Godot, Custom
@@ -34,6 +36,7 @@ trailerId: "jxx7PjNTibQ"         # The YouTube ID only (not the full URL)
 # googlePlayUrl: "https://play.google.com/..."
 # applePlayUrl: "https://apps.apple.com/..."
 # steamUrl: "https://store.steampowered.com/..."
+# websiteUrl: "httops://..."
 ---
 
 ## About the Project

@@ -1,10 +1,11 @@
 ---
-title: "Inventory System"
+title: "Portfolio Website"
 gameDescription: "grid go brr" 
 workDescription: "grid go brr"
 role: "Solo"
 status: "In development"
-timeFrame: "xxxx"
+timeFrame: "2026"
+sortDate: "2026-01-15"
 category: "UI Studies"
 cover: "/images/ui-study.jpg"
 slug: "ui-inventory"

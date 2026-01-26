@@ -6,7 +6,10 @@ const baseSchema = z.object({
   
   cover: z.string().optional(),
   
+  // Date
   timeFrame: z.string(), // Year or Range
+  sortDate: z.coerce.date(), // For sorting
+
   role: z.string(), // Solo or specific roles
   status: z.string(), // Released, In Development, Abandoned, etc.
   engine: z.string(), // Unity, Unreal, Godot, Custom, etc.

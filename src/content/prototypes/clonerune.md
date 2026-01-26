@@ -6,6 +6,7 @@ cover: "/cover/cover-clonerune.webp" # Path to your image in /public
 
 # --- METADATA ---
 timeFrame: "2022"
+sortDate: "2022-08-08"
 role: "Solo"          # e.g. Solo, Lead Dev, UI Engineer
 status: "Released"               # Released, In Development, Shelved, Cancelled
 engine: "Unity"                  # Unity, Unreal, Godot, Custom
