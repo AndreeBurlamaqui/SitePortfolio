@@ -27,6 +27,7 @@ const gameSchema = baseSchema.extend({
   googlePlayUrl: z.string().url().optional(),
   applePlayUrl: z.string().url().optional(),
   steamUrl: z.string().url().optional(),
+  websiteUrl: z.string().url().optional(),
 });
 
 const uiSchema = baseSchema.extend({

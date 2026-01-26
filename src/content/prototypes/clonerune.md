@@ -2,7 +2,7 @@
 # --- CORE INFORMATION ---
 title: "CLONERUNE"
 description: "Recreation of the Deltarune combat system (a mix of turn-based, bullet hell and QTE systems) in Unity."
-cover: "/images/projects/cover-clonerune.webp" # Path to your image in /public
+cover: "/cover/cover-clonerune.webp" # Path to your image in /public
 
 # --- METADATA ---
 timeFrame: "2022"

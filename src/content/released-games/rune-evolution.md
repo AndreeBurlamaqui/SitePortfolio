@@ -1,7 +1,7 @@
 ---
 title: "Rune Evolution"
 description: " 2D multiplayer (PvP) arcade game, inspired by “agar.io”."
-timeFrame: "2021-2022"
+timeFrame: "2021 - 2022"
 status: "Studio shutdown"
 category: "Released" 
 cover: "/cover/cover-runeevolution.webp"

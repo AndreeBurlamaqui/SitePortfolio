@@ -6,39 +6,54 @@ const { data, slug } = entry;
 ---
 
 <a href={`${basePath}/${slug}`} class="project-card">
-  <div class="card-image" style={`background-image: url(${data.cover})`}></div>
-  
-  <div class="card-info">
-    <h3>{data.title}</h3>
+    
+    <div class="card-image" style={`background-image: url(${data.cover})`}/>
 
+    <div class="entry-info">
+    <h3>{data.title}</h3>
+    <small>Developed by: {data.studio}</small>
+    <small>{data.role}</small>
+    <small>{data.timeFrame}</small>
+</div>
+
+
+<!-- <hr> -->
+
+<div class="card-info">
+    
     <TechTags rawTechStack={[
-      data.engine,
+        data.engine,
       data.language,
-      data.role,
       data.importantTechStack
     ]}/>
 
+<hr style="margin-top: auto">
+
+<!-- {data.itchUrl || data.steamUrl || data.googlePlayUrl || data.applePlayUrl ? ( -->
     <div class="store-icons">
-      {data.itchUrl && <i class="fa-brands fa-itch-io" title="Itch.io"></i>}
-      {data.steamUrl && <i class="fa-brands fa-steam" title="Steam"></i>}
-      {data.googlePlayUrl && <i class="fa-brands fa-google-play" title="Google Play"></i>}
-      {data.applePlayUrl && <i class="fa-brands fa-apple" title="App Store"></i>}
-    </div>
+                {data.itchUrl && <i class="fa-brands fa-itch-io" title="Itch.io"></i>}
+                {data.steamUrl && <i class="fa-brands fa-steam" title="Steam"></i>}
+                {data.googlePlayUrl && <i class="fa-brands fa-google-play" title="Google Play"></i>}
+                {data.applePlayUrl && <i class="fa-brands fa-apple" title="App Store"></i>}
+                {data.websiteUrl || (data.importantTechStack && data.importantTechStack.includes("WebGL")) &&
+                <i class="fa-solid fa-globe" title="WebGL"></i>}
+                {data.importantTechStack && data.importantTechStack.includes("PC") &&
+                <i class="fa-solid fa-desktop" title="PC"></i>}
+            </div>
+        <!-- ) : null} -->
   </div>
 </a>
 
 <style>
   .project-card {
-    display: flex;
-    flex-direction: column;
     text-decoration: none;
     color: inherit;
     border: 1px solid #eee;
     border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
+    background: #fafafa;
     transition: transform 0.2s, box-shadow 0.2s;
     height: 100%; /* Ensures all cards in a row match height */
+    width: 375px;
   }
 
   .project-card:hover { 
@@ -47,11 +62,11 @@ const { data, slug } = entry;
   }
 
   .card-image {
-    height: 160px;
+    width: 100%;
+    height: 375px;
     background-size: cover;
     background-position: center;
     background-color: #f0f0f0;
-    border-bottom: 1px solid #eee;
   }
 
   .card-info { 
@@ -60,16 +75,51 @@ const { data, slug } = entry;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    text-align: center;
+    justify-content: flex-start;
   }
 
-  h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; }
+  h3 { 
+    margin: 0.5rem 0 0.5rem 0; 
+    font-size: 1.75rem;
+    line-height: 1.2;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    height: 3.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
 
   .store-icons {
     margin-top: auto; /* Pushes icons to the bottom */
+    justify-content: flex-end; /* This pushes items to the right */
     display: flex;
     gap: 0.8rem;
     color: #666;
     font-size: 1.1rem;
-    padding-top: 0.5rem;
   }
+  
+  .entry-info{
+    text-align: center;
+    width: 85%;
+    margin: 1rem auto;
+
+    min-height: 120px; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .entry-info small {
+    display: block; /* Forces them to new lines */
+    line-height: 1.4;
+    color: #666;
+  }
+
 </style>

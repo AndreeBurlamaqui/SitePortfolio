@@ -31,7 +31,7 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
 <nav class="main-nav">
           
           <a href="/" class={`nav-item ${currentPath === '/' || currentPath.includes('/released-games') || currentPath.includes('/ui-studies') ? 'active' : ''}`}>
-            <i class="fa-solid fa-gamepad"></i> Projects
+            <i class="fa-solid fa-code"></i> Projects
           </a>
 
           <a href="/resume" class={`nav-item ${currentPath.includes('/resume') ? 'active' : ''}`}>

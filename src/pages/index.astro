@@ -137,21 +137,12 @@ const tabs = [
 
   /* --- GRID --- */
   .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive Grid */
+    display:flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    /* height: 100%; */
   }
 
-  .project-card {
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s;
-  }
-
-  .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
   .card-image {
     height: 160px;

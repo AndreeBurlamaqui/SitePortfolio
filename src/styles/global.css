@@ -8,3 +8,18 @@
     text-transform: uppercase;
     margin-left: 5px;
     }
+
+    hr {
+  border: 0;
+  height: 2.5px;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 0.5rem auto;
+  width: 100%;
+    }
+    
+    h3
+    {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem; 
+}
