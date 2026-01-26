@@ -21,12 +21,14 @@ const { data, slug } = entry;
 
 <div class="card-info">
     
+  <div class="tags-container">
     <TechTags rawTechStack={[
       data.engine,
       data.language,
       data.importantTechStack,
       data.githubUrl && "OSS"
     ]}/>
+  </div>
 
 <hr style="margin-top: auto">
 
@@ -72,13 +74,10 @@ const { data, slug } = entry;
   }
 
   .card-info { 
-    padding: 1rem; 
-    flex-grow: 1; /* Pushes content to fill space */
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
-    justify-content: flex-start;
   }
 
   h3 { 
@@ -113,14 +112,24 @@ const { data, slug } = entry;
 
     
     display: grid;
-    grid-template-rows: auto 1.2em 1.2em 1.2em; /* Title is the only flex grid */
+    grid-template-rows: auto 1.2em 1.2em 0; /* Title is the only flex grid */
     gap: 0;
   }
 
   .entry-info small {
     display: block; /* Forces them to new lines */
-    line-height: 1.4;
+    line-height: 1.2;
     color: #666;
   }
+
+  .tags-container {
+  height: 3rem;  /* 2 rows max*/
+  width: 100%;
+  
+  /* Push tags to the bottom of this box */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+}
 
 </style>

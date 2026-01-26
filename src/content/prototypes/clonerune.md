@@ -17,6 +17,7 @@ language: "C#"                   # C#, C++, GDScript, TypeScript
 importantTechStack: 
   - "WebGL"
   - "Documented"
+  - "Freelance Gig"
 
 # "Extra" appears in the details section (Tools, Services, Secondary Skills)
 extraTechStack: 
