@@ -9,7 +9,7 @@ cover: "/cover/motu-cover.webp"
 trailerId: "jxx7PjNTibQ"
 engine: "Unity"
 googlePlayUrl: "https://play.google.com/store/apps/details?id=com.Mattel.GuardiansOfGrayskull"
-role: "Lead Programmer"
+role: "Lead Developer"
 language: "C#"
 studio: "Hopscotch Games"
 extraTechStack:

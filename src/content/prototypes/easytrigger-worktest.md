@@ -12,7 +12,6 @@ role: "Programmer"          # e.g. Solo, Lead Dev, UI Engineer
 status: "Released"               # Released, In Development, Shelved, Cancelled
 engine: "Unity"                  # Unity, Unreal, Godot, Custom
 language: "C#"                   # C#, C++, GDScript, TypeScript
-studio: "Tiny Cacto"        # Optional: Leave blank if Solo
 
 # --- TECH STACK ---
 # "Important" appears on the card/header (Engines, Frameworks, Architecture)

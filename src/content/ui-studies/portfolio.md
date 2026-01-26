@@ -10,7 +10,6 @@ cover: "/cover/portfolio.webp"
 
 engine: "Astro"
 language: "TypeScript"
-studio: "Tiny Cacto"
 
 importantTechStack: 
     - "HTML"

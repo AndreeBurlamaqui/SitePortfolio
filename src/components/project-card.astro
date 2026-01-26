@@ -9,12 +9,12 @@ const { data, slug } = entry;
     
     <div class="card-image" style={`background-image: url(${data.cover})`}/>
 
-    <div class="entry-info">
-    <h3>{data.title}</h3>
-    <small>Developed by: {data.studio}</small>
-    <small>{data.role}</small>
-    <small>{data.timeFrame}</small>
-</div>
+  <div class="entry-info">
+      <h3>{data.title}</h3>
+      {data.studio && <small>Developed by: {data.studio}</small>}
+      <small>{data.role}</small>
+      <small>{data.timeFrame}</small>
+  </div>
 
 
 <!-- <hr> -->
@@ -111,11 +111,10 @@ const { data, slug } = entry;
     width: 85%;
     margin: 1rem auto;
 
-    min-height: 120px; 
     
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-rows: auto 1.2em 1.2em 1.2em; /* Title is the only flex grid */
+    gap: 0;
   }
 
   .entry-info small {

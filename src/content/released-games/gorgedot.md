@@ -12,7 +12,6 @@ role: "Solo"          # e.g. Solo, Lead Dev, UI Engineer
 status: "Released"               # Released, In Development, Shelved, Cancelled
 engine: "Godot"                  # Unity, Unreal, Godot, Custom
 language: "GDScript"                   # C#, C++, GDScript, TypeScript
-studio: "Tiny Cacto"
 
 
 itchUrl: "https://burlamaqui.itch.io/gorgedot"
