@@ -1,11 +1,11 @@
 ---
 # --- CORE INFORMATION ---
 title: "CLONERUNE"
-description: "Recreation of the Deltarune combat system (a mix of turn-based, bullet hell and QTE systems) in Unity."
+description: "Freelance Gig. Recreation of the Deltarune combat system (a mix of turn-based, bullet hell and QTE systems) in Unity."
 cover: "/cover/cover-clonerune.webp" # Path to your image in /public
 
 # --- METADATA ---
-timeFrame: "2022"
+timeFrame: "Aug 2022"
 sortDate: "2022-08-08"
 role: "Solo"          # e.g. Solo, Lead Dev, UI Engineer
 status: "Released"               # Released, In Development, Shelved, Cancelled
@@ -15,6 +15,9 @@ studio: "Tiny Cacto"
 
 # --- TECH STACK ---
 # "Important" appears on the card/header (Engines, Frameworks, Architecture)
+importantTechStack: 
+  - "WebGL"
+  - "Documented"
 
 # "Extra" appears in the details section (Tools, Services, Secondary Skills)
 extraTechStack: 

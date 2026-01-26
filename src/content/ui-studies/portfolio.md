@@ -1,21 +1,20 @@
 ---
 title: "Portfolio Website"
-gameDescription: "grid go brr" 
-workDescription: "grid go brr"
+description: "All of my works in a single place. With as much documentation as possible about what I did in each project." 
 role: "Solo"
 status: "In development"
 timeFrame: "2026"
 sortDate: "2026-01-15"
 category: "UI Studies"
-cover: "/images/ui-study.jpg"
-slug: "ui-inventory"
+cover: "/cover/portfolio.webp"
 
-engine: "Unity"
-language: "C#"
-studio: "Hopscotch Games"
+engine: "Astro"
+language: "TypeScript"
+studio: "Tiny Cacto"
 
 importantTechStack: 
-    - "ImGUI"
+    - "HTML"
+    - "CSS"
 extraTechStack:
     - "Figma"
 

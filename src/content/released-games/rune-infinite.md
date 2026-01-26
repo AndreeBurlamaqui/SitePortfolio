@@ -1,7 +1,7 @@
 ---
 title: "Rune Infinite"
 description: "2.5D fast-paced multiplayer (PvP) with “diablo-like” mechanics."
-timeFrame: "Sept 2021 - Nov 2022"
+timeFrame: "Sep 2021 - Nov 2022"
 sortDate: "2021-09-07"
 status: "Studio shutdown"
 category: "Released" 
