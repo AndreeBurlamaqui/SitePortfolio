@@ -4,6 +4,4 @@
   "assets": {
     "directory": "./dist"
   },
-  // Future note: This tells Cloudflare "I don't have a backend script, just host the files"
-  "main": null 
 }
