@@ -47,18 +47,17 @@ const { Content } = await entry.render();
 
     <SmartVideo data={entry.data} />
 
-      <div class="game-about">
         <div class="about-header-grid">
-            <div class="about-box contribution">
-              <span class="tag">Role: {entry.data.role}</span>
-              <span class="tag">Time Frame: {entry.data.timeFrame}</span>
-              <span class="tag">Status: {entry.data.status}</span>
+            <div class="about-box">
+              <span class="tag vertical">{entry.data.role}</span>
+              <span class="tag vertical">{entry.data.timeFrame}</span>
+              <span class="tag vertical">{entry.data.status}</span>
             </div>
 
-            <div class="about-box tech-stack">
-              <span class="tag">Engine: {entry.data.engine}</span>
-              <span class="tag">Language: {entry.data.language}</span>
-              <span class="tag">Studio: {entry.data.studio}</span>
+            <div class="about-box">
+              <span class="tag vertical">{entry.data.engine}</span>
+              <span class="tag vertical">{entry.data.language}</span>
+              <span class="tag vertical">{entry.data.studio}</span>
             </div>
           </div>
 
@@ -68,7 +67,8 @@ const { Content } = await entry.render();
               ...(entry.data.extraTechStack ?? [])
             ]} />
           </div>
-      </div>
+
+          <hr>
     </header>
 
     <div class="content-body">
@@ -81,8 +81,9 @@ const { Content } = await entry.render();
 <style>
   /* LAYOUT CONTAINER */
   .game-container {
-    max-width: 800px;
-    margin: 0 auto;
+    width: 50%;
+    margin-left: 2rem;
+    margin-right: auto;
     padding-bottom: 4rem;
   }
 
@@ -90,24 +91,6 @@ const { Content } = await entry.render();
   .game-header {
     margin-bottom: 2rem;
     text-align: center;
-  }
-
-  .game-about {
-    margin: auto;
-    margin-top: 10px;
-    padding-top: 5px;
-    padding-bottom: 2rem;
-    line-height: 1.5;
-    border: 2px solid #b6b6b6;
-    border-radius: 8px;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    width: 75%;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
   }
 
   h1 {
@@ -133,14 +116,17 @@ const { Content } = await entry.render();
   .about-header-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 1.5rem;
+    justify-content: center;
   }
 
   .about-box {
-    background: #f9f9f9; /* Subtle light background */
-    padding: 1.5rem;
+    /* background: #f9f9f9; 
     border-radius: 12px;
-    border: 1px solid #eee;
+    border: 1px solid #eee; */
+    padding: 1.5rem;
+    margin-bottom: 5px;
+    justify-content: center;
+    display: inline;
   }
 
   .about-box h3 {
@@ -157,12 +143,16 @@ const { Content } = await entry.render();
   }
 
   /* Responsive Fix for Mobile */
-  @media (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     .about-header-grid {
-      grid-template-columns: 1fr; /* Stack boxes on small screens */
+      grid-template-columns: 1fr 1fr; /* Stack boxes on small screens */
     }
-    .game-about {
-      width: 100%;
+
+    .game-container {
+      width: 90%;
+      margin-left: 1rem;
+      margin-right: auto;
     }
+
   }
 </style>
