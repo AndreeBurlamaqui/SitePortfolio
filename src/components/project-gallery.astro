@@ -119,18 +119,19 @@ function openLightbox(src: string, type: string | null) {
     overflow: hidden;
     border: 1px solid #eee;
     background: #fdfdfd;
-    transition: transform 0.2s;
-  }
-
-  .gallery-item:hover {
-    transform: scale(1.02);
-  }
+}
 
   .gallery-item img, .gallery-item video {
     width: 100%;
     display: block;
     height: auto;
+    transition: transform 0.2s;
   }
+
+  .gallery-item:hover img, 
+  .gallery-item:hover video {
+    transform: scale(1.05); /* Slight zoom in */
+}
 
   /* Zoom Icon Overlay */
   .cursor-pointer { cursor: pointer; }
