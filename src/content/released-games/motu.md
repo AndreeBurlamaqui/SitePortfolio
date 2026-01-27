@@ -4,7 +4,6 @@ description: "3D Bullet Heaven (Inverse Bullet Hell) inspired by the Masters of 
 timeFrame: "Jan 2024 - Jan 2026"
 sortDate: "2024-01-05"
 status: "Soft-launched and cancelled"
-category: "Released" 
 cover: "/cover/motu-cover.webp"
 trailerId: "jxx7PjNTibQ"
 engine: "Unity"

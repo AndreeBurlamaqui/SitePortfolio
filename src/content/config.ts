@@ -19,7 +19,9 @@ const baseSchema = z.object({
   importantTechStack: z.array(z.string()).optional(), // Shown on card, useful for UI (ImGUI, UITK, UMG)
   extraTechStack: z.array(z.string()).optional(), // Shown on page useful for tools (Blender, Figma, PlayFab, etc.)
 
-//   backgroundClip: z.string().optional(), TODO: Make a background keep running behind title
+  //   backgroundClip: z.string().optional(), TODO: Make a background keep running behind title
+
+  githubUrl: z.string().url().optional(),
 });
 
 const gameSchema = baseSchema.extend({
@@ -31,7 +33,6 @@ const gameSchema = baseSchema.extend({
   applePlayUrl: z.string().url().optional(),
   steamUrl: z.string().url().optional(),
   websiteUrl: z.string().url().optional(),
-  githubUrl: z.string().url().optional(),
 });
 
 const uiSchema = baseSchema.extend({

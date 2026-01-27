@@ -9,7 +9,7 @@ timeFrame: "Apr 2025"          # User-friendly time frame
 sortDate: 2026-05-13              # What the code uses to sort
 
 role: "Solo"          # e.g. Solo, Lead Dev, UI Engineer
-status: "Released"               # Released, In Development, Shelved, Cancelled
+status: "In Development"               # Released, In Development, Shelved, Cancelled
 engine: "Raylib"                  # Unity, Unreal, Godot, Custom
 language: "C++"                   # C#, C++, GDScript, TypeScript
 

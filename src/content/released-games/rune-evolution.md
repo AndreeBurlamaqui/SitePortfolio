@@ -4,7 +4,6 @@ description: " 2D multiplayer (PvP) arcade game, inspired by “agar.io”. Feed
 timeFrame: "Jul 2021 - Nov 2022"
 sortDate: "2021-07-30"
 status: "Studio shutdown"
-category: "Released" 
 cover: "/cover/cover-runeevolution.webp"
 trailerId: "VQNoMffJaSo"
 engine: "Unity"

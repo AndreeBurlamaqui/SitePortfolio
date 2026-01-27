@@ -3,13 +3,14 @@ title: "Portfolio Website"
 description: "All of my works in a single place. With as much documentation as possible about what I did in each project." 
 role: "Solo"
 status: "In development"
-timeFrame: "2026"
+timeFrame: "Present"
 sortDate: "2026-01-15"
-category: "UI Studies"
 cover: "/cover/portfolio.webp"
 
 engine: "Astro"
 language: "TypeScript"
+
+githubUrl: "https://github.com/AndreeBurlamaqui/SitePortfolio"
 
 importantTechStack: 
     - "HTML"
