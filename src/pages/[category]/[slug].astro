@@ -28,8 +28,8 @@ export async function getStaticPaths() {
         // If folder exists, read all image files
         if (fs.existsSync(folderPath)) {
           images = fs.readdirSync(folderPath)
-            .filter(file => /\.(png|jpe?g|webp|gif)$/i.test(file))
-            .sort() // Optional: Sorts by filename (01.jpg, 02.jpg...)
+            .filter(file => /\.(png|jpe?g|webp|gif|mp4|webm|mov)$/i.test(file))
+            .sort() // Sorts by filename (01.jpg, 02.jpg...)
             .map(file => `/gallery/${slug}/${file}`);
         }
 
@@ -99,11 +99,26 @@ const { Content } = await entry.render();
 
       <aside class="gallery-sidebar">
         <div class="gallery-sticky">
-          {images.map((src) => (
-            <div class="gallery-item">
-              <img src={src} alt="Project screenshot" loading="lazy" />
-            </div>
-          ))}
+          {images.map((src) => {
+            const isVideo = /\.(mp4|webm|mov)$/i.test(src);
+
+            return (
+              <div class="gallery-item">
+                {isVideo ? (
+                  <video 
+                    muted 
+                    loop 
+                    playsinline 
+                    src={src} 
+                    autoplay
+                    style="width: 100%; display: block;"
+                  />
+                ) : (
+                  <img src={src} alt="Project media" loading="lazy" />
+                )}
+              </div>
+            );
+          })}
         </div>
       </aside>
     </aside>
