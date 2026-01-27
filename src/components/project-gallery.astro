@@ -42,7 +42,7 @@ if (fs.existsSync(folderPath)) {
 <dialog id="lightbox-modal">
   <div class="lightbox-content">
     <button id="close-lightbox" class="close-btn">
-      <i class="fa-solid fa-xmark"></i>
+      <i class="fa-solid fa-square-xmark"></i>
     </button>
     <div id="lightbox-media-container"></div>
   </div>
@@ -172,17 +172,24 @@ function openLightbox(src: string, type: string | null) {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible;
   }
 
   .close-btn {
     position: absolute;
-    top: -40px;
+    top: 0; 
     right: 0;
+
     background: none;
     border: none;
-    color: white;
+    color: rgba(255, 255, 255, 0.15);
     font-size: 2rem;
+
     cursor: pointer;
     z-index: 10;
   }
+
+  .close-btn:hover {
+  color: rgba(195, 0, 255, 1);
+}
 </style>
