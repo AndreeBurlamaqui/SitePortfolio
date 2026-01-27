@@ -57,7 +57,7 @@ const { data, slug } = entry;
     background: #fafafa;
     transition: transform 0.2s, box-shadow 0.2s;
     height: 100%; /* Ensures all cards in a row match height */
-    width: 375px;
+    width: 275px;
   }
 
   .project-card:hover { 
@@ -67,7 +67,7 @@ const { data, slug } = entry;
 
   .card-image {
     width: 100%;
-    height: 375px;
+    height: 250px;
     background-size: cover;
     background-position: center;
     background-color: #f0f0f0;
@@ -88,10 +88,7 @@ const { data, slug } = entry;
     font-size: 1.75rem;
     line-height: 1.2;
 
-    display: -webkit-box;
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow: visible;
 
     height: 3.6rem;
     display: flex;
@@ -110,7 +107,6 @@ const { data, slug } = entry;
   
   .entry-info{
     text-align: center;
-    width: 85%;
     margin: 1rem auto;
 
     
