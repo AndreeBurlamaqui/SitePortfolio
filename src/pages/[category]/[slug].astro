@@ -1,5 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../../layouts/base-layout.astro';
 import '../../styles/global.css';
 import StoreButtons from '../../components/store-buttons.astro';
@@ -7,30 +9,46 @@ import SmartVideo from '../../components/smart-video.astro';
 import TechTags from '../../components/tech-tags.astro';
 
 export async function getStaticPaths() {
-  const games = await getCollection('released-games');
-  const uiStudies = await getCollection('ui-studies');
-  const prototypes = await getCollection('prototypes');
+  const collections = ['released-games', 'ui-studies', 'prototypes'] as const;
 
-  const gameRoutes = games.map(entry => ({
-    params: { category: 'released-games', slug: entry.slug },
-    props: { entry },
-  }));
+  // 1. Fetch all collections in parallel
+  const paths = await Promise.all(
+    collections.map(async (category) => {
+      const items = await getCollection(category);
+      
+      // 2. Process each item (Create route + Scan for images)
+      return items.map(entry => {
+        const slug = entry.slug;
+        
+        // Define where to look: public/gallery/[slug]
+        const folderPath = path.join(process.cwd(), 'public', 'gallery', slug);
+        console.log(`🔍 Checking folder: ${folderPath}`);
+        let images: string[] = [];
 
-  const uiRoutes = uiStudies.map(entry => ({
-    params: { category: 'ui-studies', slug: entry.slug },
-    props: { entry },
-  }));
+        // If folder exists, read all image files
+        if (fs.existsSync(folderPath)) {
+          images = fs.readdirSync(folderPath)
+            .filter(file => /\.(png|jpe?g|webp|gif)$/i.test(file))
+            .sort() // Optional: Sorts by filename (01.jpg, 02.jpg...)
+            .map(file => `/gallery/${slug}/${file}`);
+        }
 
-    const prototypeRoutes = prototypes.map(entry => ({
-    params: { category: 'prototypes', slug: entry.slug },
-    props: { entry },
-  }));
+        console.log(`✅ Found ${images.length} images for ${slug}`);
 
-  return [...gameRoutes, ...uiRoutes, ...prototypeRoutes];
+        return {
+          params: { category, slug },
+          props: { entry, images },
+        };
+      });
+    })
+  );
+
+  // 3. Flatten the array of arrays
+  return paths.flat();
 }
 
 // General data of the entry
-const { entry } = Astro.props;
+const { entry, images } = Astro.props;
 const { Content } = await entry.render();
 ---
 
@@ -38,6 +56,7 @@ const { Content } = await entry.render();
   
   <article class="game-container">
     
+    <div class="main-column">
     <header class="game-header">
       <h1>{entry.data.title}</h1>
       <p style="justify-content: center; text-align: center;">{entry.data.description}</p>
@@ -71,9 +90,24 @@ const { Content } = await entry.render();
           <hr>
     </header>
 
-    <div class="content-body">
-      <Content />
+
+      <div class="content-body">
+        <Content />
+      </div>
+
     </div>
+
+      <aside class="gallery-sidebar">
+        <div class="gallery-sticky">
+          {images.map((src) => (
+            <div class="gallery-item">
+              <img src={src} alt="Project screenshot" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </aside>
+    </aside>
+
 
   </article>
 </BaseLayout>
@@ -81,10 +115,14 @@ const { Content } = await entry.render();
 <style>
   /* LAYOUT CONTAINER */
   .game-container {
-    width: 50%;
-    margin-left: 2rem;
-    margin-right: auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Main Content | Sidebar */
+    gap: 6rem;
+    width: 90%;
+    max-width: 1400px; /* prevents lines from getting too long on 4k screens */
     padding-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* HEADER */
@@ -141,6 +179,38 @@ const { Content } = await entry.render();
   .about-details {
     padding: 0 0.5rem; /* Slight indent so tags align with boxes */
   }
+
+  .gallery-sidebar {
+    margin-left: auto;
+    margin-right: auto;
+    overflow: scroll;
+  }
+
+  .gallery-sticky {
+    top: 5rem; /* Keeps images in view while scrolling */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #fdfdfd;
+    transition: transform 0.2s;
+  }
+  
+  .gallery-item:hover {
+    transform: scale(1.02);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
 
   /* Responsive Fix for Mobile */
   @media screen and (max-width: 768px) {
