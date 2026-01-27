@@ -1,0 +1,188 @@
+---
+interface Props {
+    folder: string; // Expect the slug
+}
+
+const { folder } = Astro.props;
+
+// Import images and videos
+import fs from 'node:fs';
+import path from 'node:path';
+const folderPath = path.join(process.cwd(), 'public', 'gallery', folder);
+let media: string[] = [];
+
+if (fs.existsSync(folderPath)) {
+  media = fs.readdirSync(folderPath)
+    .filter(file => /\.(png|jpe?g|webp|gif|mp4|webm|mov)$/i.test(file))
+    .sort()
+    .map(file => `/gallery/${folder}/${file}`);
+}
+---
+
+<div class="gallery-list">
+    {media.map((src) => {
+      const isVideo = /\.(mp4|webm|mov)$/i.test(src);
+      return (
+        <div 
+          class="gallery-item cursor-pointer"
+          data-src={src}
+          data-type={isVideo ? 'video' : 'img'}
+        >
+          {isVideo ? (
+            <video muted loop playsinline autoplay src={src} />
+          ) : (
+            <img src={src} alt="Gallery Media" loading="lazy" />
+          )}
+          <div class="zoom-icon"><i class="fa-solid fa-expand"></i></div>
+        </div>
+      );
+    })}
+  </div>
+
+<dialog id="lightbox-modal">
+  <div class="lightbox-content">
+    <button id="close-lightbox" class="close-btn">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div id="lightbox-media-container"></div>
+  </div>
+</dialog>
+
+<script>
+  // Runs only once per page load
+  const dialog = document.getElementById('lightbox-modal') as HTMLDialogElement | null;
+  const container = document.getElementById('lightbox-media-container');
+  const closeBtn = document.getElementById('close-lightbox');
+  const triggers = document.querySelectorAll('.gallery-item');
+
+function openLightbox(src: string, type: string | null) {
+        if (!container || !dialog) return;
+    container.innerHTML = '';
+
+    if (type === 'video') {
+      const vid = document.createElement('video');
+      vid.src = src;
+      vid.controls = true;
+      vid.autoplay = true;
+      vid.style.maxHeight = '90vh';
+      vid.style.maxWidth = '100%';
+      container.appendChild(vid);
+    } else {
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.maxHeight = '90vh';
+      img.style.maxWidth = '100%';
+      img.style.objectFit = 'contain';
+      container.appendChild(img);
+    }
+    dialog.showModal();
+  }
+
+  function closeLightbox() {
+    if (!dialog || !container) return;
+    dialog.close();
+    container.innerHTML = '';
+  }
+
+  // Event Listeners
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const el = trigger as Element; // Cast 'trigger' to Element to access getAttribute safely
+      const src = el.getAttribute('data-src');
+      const type = el.getAttribute('data-type');
+      // Only open if src exists
+      if (src) {
+        openLightbox(src, type);
+      }
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  
+  if (dialog) {
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) closeLightbox();
+    });
+  }
+</script>
+
+<style>
+  .gallery-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #fdfdfd;
+    transition: transform 0.2s;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.02);
+  }
+
+  .gallery-item img, .gallery-item video {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  /* Zoom Icon Overlay */
+  .cursor-pointer { cursor: pointer; }
+  
+  .zoom-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+
+  .gallery-item:hover .zoom-icon {
+    opacity: 1;
+  }
+
+  /* Lightbox Styles */
+  dialog {
+    border: none;
+    background: transparent;
+    padding: 0;
+    max-width: 95vw;
+    max-height: 95vh;
+    outline: none;
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+</style>

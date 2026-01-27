@@ -1,54 +1,30 @@
 ---
 import { getCollection } from 'astro:content';
-import fs from 'node:fs';
-import path from 'node:path';
 import BaseLayout from '../../layouts/base-layout.astro';
 import '../../styles/global.css';
 import StoreButtons from '../../components/store-buttons.astro';
 import SmartVideo from '../../components/smart-video.astro';
 import TechTags from '../../components/tech-tags.astro';
+import ProjectGallery from '../../components/project-gallery.astro';
 
 export async function getStaticPaths() {
   const collections = ['released-games', 'ui-studies', 'prototypes'] as const;
-
-  // 1. Fetch all collections in parallel
+  
   const paths = await Promise.all(
     collections.map(async (category) => {
       const items = await getCollection(category);
-      
-      // 2. Process each item (Create route + Scan for images)
-      return items.map(entry => {
-        const slug = entry.slug;
-        
-        // Define where to look: public/gallery/[slug]
-        const folderPath = path.join(process.cwd(), 'public', 'gallery', slug);
-        console.log(`🔍 Checking folder: ${folderPath}`);
-        let images: string[] = [];
-
-        // If folder exists, read all image files
-        if (fs.existsSync(folderPath)) {
-          images = fs.readdirSync(folderPath)
-            .filter(file => /\.(png|jpe?g|webp|gif|mp4|webm|mov)$/i.test(file))
-            .sort() // Sorts by filename (01.jpg, 02.jpg...)
-            .map(file => `/gallery/${slug}/${file}`);
-        }
-
-        console.log(`✅ Found ${images.length} images for ${slug}`);
-
-        return {
-          params: { category, slug },
-          props: { entry, images },
-        };
-      });
+      return items.map(entry => ({
+        params: { category, slug: entry.slug },
+        props: { entry },
+      }));
     })
   );
 
-  // 3. Flatten the array of arrays
   return paths.flat();
 }
 
 // General data of the entry
-const { entry, images } = Astro.props;
+const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
@@ -99,26 +75,7 @@ const { Content } = await entry.render();
 
       <aside class="gallery-sidebar">
         <div class="gallery-sticky">
-          {images.map((src) => {
-            const isVideo = /\.(mp4|webm|mov)$/i.test(src);
-
-            return (
-              <div class="gallery-item">
-                {isVideo ? (
-                  <video 
-                    muted 
-                    loop 
-                    playsinline 
-                    src={src} 
-                    autoplay
-                    style="width: 100%; display: block;"
-                  />
-                ) : (
-                  <img src={src} alt="Project media" loading="lazy" />
-                )}
-              </div>
-            );
-          })}
+          <ProjectGallery folder={entry.slug} />
         </div>
       </aside>
     </aside>
