@@ -30,18 +30,3 @@ websiteUrl: "https://drive.google.com/file/d/18YkKm-KOTUgJJ99s9DcovuEc6e7TP4Ee/v
 githubUrl: "https://github.com/AndreeBurlamaqui/GraveRobber_LSW"
 ---
 
-## About the Project
-Write a brief introduction here. What is the game? What was the core hook?
-
-## My Contribution
-Focus on what **YOU** did. Since you are a Lead, talk about:
-* Architecture decisions.
-* Team management or code reviews.
-* Specific complex systems you built (e.g., the inventory system, the optimization pipeline).
-
-## Technical Challenges
-* **Challenge 1:** Describe a hard bug or performance issue.
-* **Solution:** How you fixed it.
-
-## Gallery
-(Optional: Add screenshots here)

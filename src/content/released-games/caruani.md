@@ -38,6 +38,13 @@ itchUrl: "https://albumarques.itch.io/caruani"
 # githubUrl: "https://github.com/AndreeBurlamaqui/..."
 ---
 
-  - "Winner in students \"Best Art\""
-  - "Finalist in students \"Best Game\" with honorable mention"
-  - "Finalist in students \"Best Sound Design\""
+## AWARDS
+Award-winner on SBGames 2021
+- Winner in students \"Best Art\"
+- Finalist in students \"Best Game\" with honorable mention
+- Finalist in students \"Best Sound Design\"
+
+## MY CONTRIBUTION
+- Lead the refactoring of an existing code from prototype, changing it to a well-structured base, and removing prototype code.
+- Helped and guided student programmers who were recently learning Unity and C#
+- Illustrated the Cuca’s portrait (used in dialogue and battle) and some chibi versions (used in the world map).

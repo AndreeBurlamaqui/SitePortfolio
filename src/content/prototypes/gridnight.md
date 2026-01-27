@@ -27,18 +27,38 @@ importantTechStack:
 githubUrl: "https://github.com/AndreeBurlamaqui/Gridnight"
 ---
 
-## About the Project
-Write a brief introduction here. What is the game? What was the core hook?
+## Instructions
 
-## My Contribution
-Focus on what **YOU** did. Since you are a Lead, talk about:
-* Architecture decisions.
-* Team management or code reviews.
-* Specific complex systems you built (e.g., the inventory system, the optimization pipeline).
+1. Gameplay
+- Implement character movement logic.
+- Implement character animations.
+- Implement character interaction with the world (e.g., picking up items, talking to
+NPCs).
 
-## Technical Challenges
-* **Challenge 1:** Describe a hard bug or performance issue.
-* **Solution:** How you fixed it.
+2. Inventory Structure
+- Implement a UI slot-based inventory.
+- Implement interactions for:
+  - Adding items to the inventory.
+  - Removing items from the inventory.
+  - Moving items within the inventory.
+  - Dragging and swapping items between inventory slots.
+  - Using or equipping items (e.g., consuming health potions, equipping
+weapons).
 
-## Gallery
-(Optional: Add screenshots here)
+3. UI Design
+- Ensure the UI dynamically updates based on inventory contents.
+- Design a clear, intuitive, and visually appealing inventory UI.
+- Show item details when selected or hovered over (via tooltip or dedicated panel).
+
+4. Save and Load System
+- Implement a save system for inventory state.
+- Implement loading of inventory data when the game starts.
+- Ensure slot-based persistence for each item.
+
+### Suggested Additional Features
+
+(Extra features, not mandatory)
+1. World Building
+  - Elevate your world by showcasing your world-building and level design skills. Consider adding elements like NPCs, sounds, VFX, and any other extras to make it truly captivating.
+
+>>Ensure these core functionalities are robust and polished. However, don't hesitate to go beyond the essentials by incorporating additional features that can showcase your creativity and deeper understanding of Unity's capabilities. These extra touches will not only demonstrate your technical proficiency but also your ability to deliver a comprehensive and engaging user experience.

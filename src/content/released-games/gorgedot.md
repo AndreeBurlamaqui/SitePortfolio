@@ -18,8 +18,3 @@ itchUrl: "https://burlamaqui.itch.io/gorgedot"
 githubUrl: "https://github.com/AndreeBurlamaqui/Gorgedot"
 ---
 
-## About the Project
-The client agreed to make it an open-source project. In itch, there'll also be a notion page link to explain how the System works code-wise
-
-## Documentation
-https://tiny-studios.notion.site/Deltarune-Combat-System-22ebafc5776d47d4ba3e1c829edcaca4

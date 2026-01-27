@@ -27,18 +27,11 @@ importantTechStack:
 githubUrl: "https://github.com/AndreeBurlamaqui/raylib-cpp-studies"
 ---
 
-## About the Project
-Write a brief introduction here. What is the game? What was the core hook?
+## ABOUT THE PROJECT
+Currently with 2 projects only.
 
-## My Contribution
-Focus on what **YOU** did. Since you are a Lead, talk about:
-* Architecture decisions.
-* Team management or code reviews.
-* Specific complex systems you built (e.g., the inventory system, the optimization pipeline).
+1. [Dino Chrome Clone:](https://github.com/AndreeBurlamaqui/raylib-cpp-studies/tree/squaredino/prototype)
+Character, background and UI all drawn with drawing library from Raylib.
 
-## Technical Challenges
-* **Challenge 1:** Describe a hard bug or performance issue.
-* **Solution:** How you fixed it.
-
-## Gallery
-(Optional: Add screenshots here)
+2. [Simple brawling Game:](https://github.com/AndreeBurlamaqui/raylib-cpp-studies/tree/fightman/prototype)
+Alongside with drawing features from Dino Clone (1.), created tweening by hand, to animate UI and character fists.

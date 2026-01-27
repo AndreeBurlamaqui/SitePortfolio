@@ -19,5 +19,3 @@ extraTechStack:
     - "Figma"
 
 ---
-# UI Study
-Here is how I handled the inventory grid...

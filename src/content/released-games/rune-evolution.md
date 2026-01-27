@@ -20,3 +20,4 @@ googlePlayUrl: "https://web.archive.org/web/20220106162026/https://play.google.c
 
 # Rune Universe
 I joined the project when it was already finished, and I was responsible for refactoring it so it's more scalable, adding game juice, porting to Android and moving the network architecture to use Mirror
+
