@@ -1,0 +1,9 @@
+{
+  "name": "portfolio", 
+  "compatibility_date": "2026-01-27",
+  "assets": {
+    "directory": "./dist"
+  },
+  // Future note: This tells Cloudflare "I don't have a backend script, just host the files"
+  "main": null 
+}
