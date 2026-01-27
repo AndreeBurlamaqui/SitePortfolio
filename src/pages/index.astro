@@ -143,7 +143,6 @@ const tabs = [
     flex-wrap: wrap;
     gap: 2rem;
     /* height: 100%; */
-    justify-content: center;
   }
 
 
@@ -176,6 +175,12 @@ const tabs = [
     padding: 3rem;
     color: #999;
     font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .project-grid {
+      justify-content: center;
+    }
   }
 
 </style>
