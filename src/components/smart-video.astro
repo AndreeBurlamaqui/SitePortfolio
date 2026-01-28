@@ -1,5 +1,4 @@
 ---
-// src/components/SmartVideo.astro
 const { data } = Astro.props;
 
 const thumbnailUrl = `https://img.youtube.com/vi/${data.trailerId}/hqdefault.jpg`;
@@ -21,34 +20,41 @@ if (data.trailerId) {
 }
 ---
 
-<div class="video-container">
-  {isVideoValid ? (
-    /* OPTION A: VALID VIDEO -> IFRAME */
-    <div class="iframe-wrapper">
-      <iframe
-        src={embedUrl}
-        title={`Trailer for ${data.title}`}
-        allow="clipboard-write; encrypted-media; gyroscope; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    </div>
-  ) : (
-    /* OPTION B: INVALID/PRIVATE -> THUMBNAIL CARD */
-    <a href={videoUrl} target="_blank" class="video-fallback-card" aria-label="Watch trailer on YouTube">
-      <div class="thumbnail-overlay" style={`background-image: url(${thumbnailUrl})`}>
-        <div class="play-button">
-           <i class="fa-brands fa-youtube"></i>
-           <span>Watch on YouTube</span>
+{data.trailerId ? (
+  <div class="video-container">
+    {isVideoValid ? (
+      /* VALID VIDEO -> IFRAME */
+      <div class="iframe-wrapper">
+        <iframe
+          src={embedUrl}
+          title={`Trailer for ${data.title}`}
+          allow="clipboard-write; encrypted-media; gyroscope; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    ) : (
+      /* INVALID/PRIVATE -> THUMBNAIL CARD */
+      <a href={videoUrl} target="_blank" class="video-fallback-card" aria-label="Watch trailer on YouTube">
+        <div class="thumbnail-overlay" style={`background-image: url(${thumbnailUrl})`}>
+          <div class="play-button">
+            <i class="fa-brands fa-youtube"></i>
+            <span>Watch on YouTube</span>
+          </div>
         </div>
+        <div class="fallback-info">
+          <p>Trailer: {data.title}</p>
+          <small>Playback restricted by YouTube. Click to view on the official site.</small>
+        </div>
+      </a>
+    )}
+    </div>
+  ) : data.cover && (
+    /* No trailerId provided; Display cover */
+      <div class="video-container">
+        <img src={data.cover} class="iframe-wrapper" />
       </div>
-      <div class="fallback-info">
-        <p>Trailer: {data.title}</p>
-        <small>Playback restricted by YouTube. Click to view on the official site.</small>
-      </div>
-    </a>
   )}
-</div>
 
 <style>
   .video-container {
@@ -64,6 +70,9 @@ if (data.trailerId) {
     overflow: hidden;
     background: #000;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    height: 475px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   iframe {
@@ -90,7 +99,7 @@ if (data.trailerId) {
   }
 
   .thumbnail-overlay {
-    height: 250px;
+    height: 475px;
     background-size: cover;
     background-position: center;
     position: relative;
