@@ -16,6 +16,7 @@ extraTechStack:
     - "Beamable" # Cloudsaving and login backend
     - "Addressables"
     - "Jobs System"
+    - "Assessment Reviewer"
 ---
 
 # My Contribution

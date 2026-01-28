@@ -5,28 +5,22 @@ import '../../styles/global.css';
 import StoreButtons from '../../components/store-buttons.astro';
 import SmartVideo from '../../components/smart-video.astro';
 import TechTags from '../../components/tech-tags.astro';
+import ProjectGallery from '../../components/project-gallery.astro';
 
 export async function getStaticPaths() {
-  const games = await getCollection('released-games');
-  const uiStudies = await getCollection('ui-studies');
-  const prototypes = await getCollection('prototypes');
+  const collections = ['released-games', 'ui-studies', 'prototypes'] as const;
+  
+  const paths = await Promise.all(
+    collections.map(async (category) => {
+      const items = await getCollection(category);
+      return items.map(entry => ({
+        params: { category, slug: entry.slug },
+        props: { entry },
+      }));
+    })
+  );
 
-  const gameRoutes = games.map(entry => ({
-    params: { category: 'released-games', slug: entry.slug },
-    props: { entry },
-  }));
-
-  const uiRoutes = uiStudies.map(entry => ({
-    params: { category: 'ui-studies', slug: entry.slug },
-    props: { entry },
-  }));
-
-    const prototypeRoutes = prototypes.map(entry => ({
-    params: { category: 'prototypes', slug: entry.slug },
-    props: { entry },
-  }));
-
-  return [...gameRoutes, ...uiRoutes, ...prototypeRoutes];
+  return paths.flat();
 }
 
 // General data of the entry
@@ -38,6 +32,7 @@ const { Content } = await entry.render();
   
   <article class="game-container">
     
+    <div class="main-column">
     <header class="game-header">
       <h1>{entry.data.title}</h1>
       <p style="justify-content: center; text-align: center;">{entry.data.description}</p>
@@ -71,9 +66,14 @@ const { Content } = await entry.render();
           <hr>
     </header>
 
-    <div class="content-body">
-      <Content />
+
+      <div class="content-body">
+        <Content />
+      </div>
+
     </div>
+
+      <ProjectGallery folder={entry.slug} />
 
   </article>
 </BaseLayout>
@@ -81,10 +81,14 @@ const { Content } = await entry.render();
 <style>
   /* LAYOUT CONTAINER */
   .game-container {
-    width: 50%;
-    margin-left: 2rem;
-    margin-right: auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Main Content | Sidebar */
+    gap: 6rem;
+    width: 90%;
+    max-width: 1400px; /* prevents lines from getting too long on 4k screens */
     padding-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* HEADER */

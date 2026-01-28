@@ -19,11 +19,12 @@ studio: "UNIVALI Students"        # Optional: Leave blank if Solo
 importantTechStack: 
   - "Award-winner"
   - "PC"
+  - "Student Project"
 
 # "Extra" appears in the details section (Tools, Services, Secondary Skills)
 extraTechStack: 
   - "Krita"
-  - "Teacher"
+  - "Mentoring"
 
 
 # --- MEDIA & LINKS (Game Only) ---
@@ -47,4 +48,4 @@ Award-winner on SBGames 2021
 ## MY CONTRIBUTION
 - Lead the refactoring of an existing code from prototype, changing it to a well-structured base, and removing prototype code.
 - Helped and guided student programmers who were recently learning Unity and C#
-- Illustrated the Cuca’s portrait (used in dialogue and battle) and some chibi versions (used in the world map).
+- Illustrated the [Cuca’s portrait (used in dialogue and battle)](https://www.artstation.com/artwork/3qgNxm) and some [chibi versions (used in the world)](https://www.artstation.com/artwork/aGJxqJ).
