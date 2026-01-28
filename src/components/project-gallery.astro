@@ -108,12 +108,16 @@ function openLightbox(src: string, type: string | null) {
 
 <style>
   .gallery-list {
+    position: sticky;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
+    overflow-y: auto;
+    height: 80vh;
+}
 
-  .gallery-item {
+.gallery-item {
+    flex-shrink: 0;
     position: relative;
     border-radius: 8px;
     overflow: hidden;

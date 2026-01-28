@@ -153,46 +153,14 @@ const { Content } = await entry.render();
   }
 
   .gallery-sidebar {
-    /* 1. Define the "Window" Size */
-  max-height: 80vh;  /* Uses 80% of the screen height */
-  overflow-y: auto;  /* Adds scrollbar if images exceed that height */
-  
-  /* 2. Positioning */
-  position: sticky;  /* Keeps the window in view while you read */
-  top: 5rem;         /* 2rem gap from top of screen */
-  
-  /* 3. Layout */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-right: 10px; /* Prevents scrollbar from covering image edge */
+    position: sticky;
+    top: 5rem;
   }
 
   .gallery-sticky {
-    top: 5rem; /* Keeps images in view while scrolling */
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
-
-  .gallery-item {
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #eee;
-    background: #fdfdfd;
-    transition: transform 0.2s;
-  }
-  
-  .gallery-item:hover {
-    transform: scale(1.02);
-  }
-
-  .gallery-item img {
-    width: 100%;
-    display: block;
-    height: auto;
-  }
-
 
   /* Responsive Fix for Mobile */
   @media screen and (max-width: 768px) {
