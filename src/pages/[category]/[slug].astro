@@ -73,13 +73,7 @@ const { Content } = await entry.render();
 
     </div>
 
-      <aside class="gallery-sidebar">
-        <div class="gallery-sticky">
-          <ProjectGallery folder={entry.slug} />
-        </div>
-      </aside>
-    </aside>
-
+      <ProjectGallery folder={entry.slug} />
 
   </article>
 </BaseLayout>
@@ -150,16 +144,6 @@ const { Content } = await entry.render();
 
   .about-details {
     padding: 0 0.5rem; /* Slight indent so tags align with boxes */
-  }
-
-  .gallery-sidebar {
-    position: sticky;
-    top: 5rem;
-  }
-
-  .gallery-sticky {
-    display: flex;
-    flex-direction: column;
   }
 
   /* Responsive Fix for Mobile */
