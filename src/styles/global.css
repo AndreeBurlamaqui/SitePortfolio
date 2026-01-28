@@ -1,7 +1,7 @@
 .tag { 
     display: inline-flex;
     align-items: center;
-    font-size: 0.8rem; 
+    font-size: 0.65rem; 
     background: #eee; 
     padding: 0.2rem 0.5rem;
     border-radius: 4px; 
@@ -17,6 +17,9 @@
       width: fit-content;
       margin-left: auto;
       margin-right: auto;
+    }
+    .tag.bigger{
+      font-size: 0.75rem; 
     }
 
     hr {

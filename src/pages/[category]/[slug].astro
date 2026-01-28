@@ -44,15 +44,15 @@ const { Content } = await entry.render();
 
         <div class="about-header-grid">
             <div class="about-box">
-              <span class="tag vertical">{entry.data.role}</span>
-              <span class="tag vertical">{entry.data.timeFrame}</span>
-              <span class="tag vertical">{entry.data.status}</span>
+              <span class="tag vertical bigger">{entry.data.role}</span>
+              <span class="tag vertical bigger">{entry.data.timeFrame}</span>
+              <span class="tag vertical bigger">{entry.data.status}</span>
             </div>
 
             <div class="about-box">
-              <span class="tag vertical">{entry.data.engine}</span>
-              <span class="tag vertical">{entry.data.language}</span>
-              <span class="tag vertical">{entry.data.studio}</span>
+              <span class="tag vertical bigger">{entry.data.engine}</span>
+              <span class="tag vertical bigger">{entry.data.language}</span>
+              <span class="tag vertical bigger">{entry.data.studio}</span>
             </div>
           </div>
 
@@ -127,10 +127,11 @@ const { Content } = await entry.render();
     /* background: #f9f9f9; 
     border-radius: 12px;
     border: 1px solid #eee; */
-    padding: 1.5rem;
+    padding: 1rem;
     margin-bottom: 5px;
     justify-content: center;
     display: inline;
+    font-size: 0.8rem; 
   }
 
   .about-box h3 {
