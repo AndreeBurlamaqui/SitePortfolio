@@ -43,6 +43,10 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
             <i class="fa-solid fa-file-lines"></i> Resume
           </a>
 
+          <a href="/thesis" class={`nav-item ${currentPath.includes('/thesis') ? 'active' : ''}`}>
+            <i class="fa-solid fa-graduation-cap"></i> University Thesis
+          </a>
+
         </nav>
 
         <!-- REMOVE WHEN FINISHED -->
