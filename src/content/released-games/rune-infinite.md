@@ -18,12 +18,12 @@ extraTechStack:
 ---
 
 # Rune Universe
-Started the project with a team of 3 programmers. Created the Movement System, UI/UX, Network Architecture (using Mirror) and majority of the Combat System 
+Started the project with a team of 3 programmers. Created the Movement System, UI/UX, Network Architecture (using Mirror) and majority of the Combat System .
+All that can be seen in the Gallery was implemented by me, including VFX creation.
 
-## Summary
-Name       | Description
----        | ---
-[UI](#ui)    | Explanation about how UI was designed, made and implemented.
+Section            | Description
+---                | ---
+[UI](#ui)          | Explanation about how UI was designed, made and implemented.
 [INPUT](#input)    | Explanation about how Input was designed, made and implemented.
 
 
