@@ -2,11 +2,11 @@
 # --- CORE INFORMATION ---
 title: "Simple Raylib Games"
 description: "A collection of code-only study projects, no assets or 3rd party plugins. Each project is on a different branch, sometimes with sub-branches for some extra features."
-cover: "/cover/cover-simpleraylib.webp" # Path to your image in /public
+cover: "/cover/cover-raylibsimplegames.webp" # Path to your image in /public
 
 # --- METADATA ---
-timeFrame: "Apr 2025"          # User-friendly time frame
-sortDate: 2026-05-13              # What the code uses to sort
+timeFrame: "Apr 2025 - Present"          # User-friendly time frame
+sortDate: 2025-05-13              # What the code uses to sort
 
 role: "Solo"          # e.g. Solo, Lead Dev, UI Engineer
 status: "In Development"               # Released, In Development, Shelved, Cancelled
