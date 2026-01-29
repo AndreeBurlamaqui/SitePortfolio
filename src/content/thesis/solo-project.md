@@ -13,6 +13,9 @@ language: "C#"
 itchUrl: "https://burlamaqui.itch.io/wispofthyheat"
 githubUrl: "https://github.com/AndreeBurlamaqui/WispOfThyHeatAct1"
 
+importantTechStack:
+    - "Finalist in SBGames 2021 \"Best Student Game\""
 ---
 
-This is the solo project
+* Soundtrack by [Cody Woods](https://woodscody4.wixsite.com/website)
+* Logo by [Kenney](https://kenney.nl/)

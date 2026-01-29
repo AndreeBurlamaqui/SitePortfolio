@@ -2,6 +2,7 @@ This research compiles "Good Practices" gathered from 29 post-mortems and adviso
 
 > <small>It was written in PT-BR at the same time as the thesis project was being developed.</small> <br>
 > <small>Later translated to ENG and published by Acta Ludologica Volume 4 in 2021.</small>
+> <small> The article was well-received by the defense committee and my academic advisor asked me to use it as an example for the next students to follow. </small>
 
 <!-- <hr> -->
 
