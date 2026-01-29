@@ -40,11 +40,18 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
           </a>
 
           <a href="/resume" class={`nav-item ${currentPath.includes('/resume') ? 'active' : ''}`}>
-            <i class="fa-solid fa-file-lines"></i> Resume
+            <i class="fa-solid fa-file-lines"></i> CV / Resume
           </a>
 
           <a href="/thesis" class={`nav-item ${currentPath.includes('/thesis') ? 'active' : ''}`}>
             <i class="fa-solid fa-graduation-cap"></i> University Thesis
+          </a>
+
+          <a 
+            href="mailto:umdreeb@gmail.com?subject=Hiring%20Inquiry&body=Hey,%reaching%out%after%seeing%your%work."
+             class="nav-item"
+            >
+            <i class="fa-solid fa-envelope"></i> Email Me
           </a>
 
         </nav>
