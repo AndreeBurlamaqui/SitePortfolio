@@ -5,7 +5,7 @@ role: "Solo"
 status: "In development"
 timeFrame: "Present"
 sortDate: "2026-01-15"
-cover: "/cover/portfolio.webp"
+cover: "/cover/cover-portfolio.png"
 
 engine: "Astro"
 language: "TypeScript"
