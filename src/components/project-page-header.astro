@@ -1,0 +1,92 @@
+---
+import StoreButtons from '../components/store-buttons.astro';
+import SmartVideo from '../components/smart-video.astro';
+import TechTags from '../components/tech-tags.astro';
+
+const { project } = Astro.props;
+---
+
+    <header class="game-header">
+      <h1>{project.title}</h1>
+      <p style="justify-content: center; text-align: center;">{project.description}</p>
+      <StoreButtons data = {project}/>
+
+      <hr>
+
+    <SmartVideo data={project} />
+
+        <div class="about-header-grid">
+            <div class="about-box">
+              <span class="tag vertical bigger">{project.role}</span>
+              <span class="tag vertical bigger">{project.timeFrame}</span>
+              <span class="tag vertical bigger">{project.status}</span>
+            </div>
+
+            <div class="about-box">
+              <span class="tag vertical bigger">{project.engine}</span>
+              <span class="tag vertical bigger">{project.language}</span>
+              <span class="tag vertical bigger">{project.studio}</span>
+            </div>
+          </div>
+
+          <div class="about-details">
+            <TechTags rawTechStack={[
+              ...(project.importantTechStack ?? []),
+              ...(project.extraTechStack ?? [])
+            ]} />
+          </div>
+
+          <hr>
+    </header>
+
+    <style>
+
+        /* HEADER */
+  .game-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+    line-height: 1.1;
+  }
+
+  .about-header-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    justify-content: center;
+  }
+
+  .about-box {
+    /* background: #f9f9f9; 
+    border-radius: 12px;
+    border: 1px solid #eee; */
+    padding: 1rem;
+    margin-bottom: 5px;
+    justify-content: center;
+    display: inline;
+    font-size: 0.8rem; 
+  }
+
+  .about-box h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 1px;
+  }
+
+  .about-details {
+    padding: 0 0.5rem; /* Slight indent so tags align with boxes */
+  }
+
+  /* Responsive Fix for Mobile */
+  @media screen and (max-width: 768px) {
+    .about-header-grid {
+      grid-template-columns: 1fr 1fr; /* Stack boxes on small screens */
+    }
+  }
+    </style>

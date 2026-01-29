@@ -2,9 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/base-layout.astro';
 import '../../styles/global.css';
-import StoreButtons from '../../components/store-buttons.astro';
-import SmartVideo from '../../components/smart-video.astro';
-import TechTags from '../../components/tech-tags.astro';
+import ProjectPageHeader from '../../components/project-page-header.astro';
 import ProjectGallery from '../../components/project-gallery.astro';
 
 export async function getStaticPaths() {
@@ -33,39 +31,8 @@ const { Content } = await entry.render();
   <article class="game-container">
     
     <div class="main-column">
-    <header class="game-header">
-      <h1>{entry.data.title}</h1>
-      <p style="justify-content: center; text-align: center;">{entry.data.description}</p>
-      <StoreButtons data = {entry.data}/>
 
-      <hr>
-
-    <SmartVideo data={entry.data} />
-
-        <div class="about-header-grid">
-            <div class="about-box">
-              <span class="tag vertical bigger">{entry.data.role}</span>
-              <span class="tag vertical bigger">{entry.data.timeFrame}</span>
-              <span class="tag vertical bigger">{entry.data.status}</span>
-            </div>
-
-            <div class="about-box">
-              <span class="tag vertical bigger">{entry.data.engine}</span>
-              <span class="tag vertical bigger">{entry.data.language}</span>
-              <span class="tag vertical bigger">{entry.data.studio}</span>
-            </div>
-          </div>
-
-          <div class="about-details">
-            <TechTags rawTechStack={[
-              ...(entry.data.importantTechStack ?? []),
-              ...(entry.data.extraTechStack ?? [])
-            ]} />
-          </div>
-
-          <hr>
-    </header>
-
+      <ProjectPageHeader project={entry.data} />
 
       <div class="content-body">
         <Content />
@@ -73,7 +40,7 @@ const { Content } = await entry.render();
 
     </div>
 
-      <ProjectGallery folder={entry.slug} />
+    <ProjectGallery folder={entry.slug} />
 
   </article>
 </BaseLayout>
@@ -91,18 +58,6 @@ const { Content } = await entry.render();
     margin-right: auto;
   }
 
-  /* HEADER */
-  .game-header {
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 3rem;
-    margin: 0.5rem 0;
-    line-height: 1.1;
-  }
-
   /* MARKDOWN CONTENT STYLES */
   .content-body {
     font-size: 0.9rem;
@@ -117,41 +72,9 @@ const { Content } = await entry.render();
     border-radius: 8px;
   }
 
-  .about-header-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    justify-content: center;
-  }
-
-  .about-box {
-    /* background: #f9f9f9; 
-    border-radius: 12px;
-    border: 1px solid #eee; */
-    padding: 1rem;
-    margin-bottom: 5px;
-    justify-content: center;
-    display: inline;
-    font-size: 0.8rem; 
-  }
-
-  .about-box h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    color: #888;
-    letter-spacing: 1px;
-  }
-
-  .about-details {
-    padding: 0 0.5rem; /* Slight indent so tags align with boxes */
-  }
 
   /* Responsive Fix for Mobile */
   @media screen and (max-width: 768px) {
-    .about-header-grid {
-      grid-template-columns: 1fr 1fr; /* Stack boxes on small screens */
-    }
 
     .game-container {
       width: 90%;
