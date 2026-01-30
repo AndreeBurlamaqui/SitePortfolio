@@ -17,6 +17,7 @@ extraTechStack:
     - "Addressables"
     - "Jobs System"
     - "Assessment Reviewer"
+    - "Figma"
 ---
 
 # My Contribution
@@ -51,10 +52,3 @@ As the Lead, I prioritized **developer experience (DX)** and codebase scalabilit
 * **Art Pipeline:** Created custom Editor Tools allowing artists to set up gameplay components and balance levels without engineer supervision.
 * **Code Quality:** Enforced strict architectural standards via Code Reviews and PR workflows.
 * **Architecture:** Designed a modular component system (Movements, Drops, Effects) that allowed Game Designers to iterate rapidly.
-
-# Gallery
-![Gameplay showing high enemy count](/images/gameplay-horde.webp)
-*Gameplay capture running on Android*
-
-![Custom Editor Tool](/images/editor-tools.webp)
-*Custom inspector tools built for the design team*

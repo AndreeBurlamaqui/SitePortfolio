@@ -8,82 +8,147 @@ const { folder } = Astro.props;
 // Import images and videos
 import fs from 'node:fs';
 import path from 'node:path';
+
 const folderPath = path.join(process.cwd(), 'public', 'gallery', folder);
-let media: string[] = [];
+
+interface MediaItem {
+  src: string;
+  type: 'video' | 'img';
+  title: string;
+}
+
+let media: MediaItem[] = [];
 
 if (fs.existsSync(folderPath)) {
   media = fs.readdirSync(folderPath)
     .filter(file => /\.(png|jpe?g|webp|gif|mp4|webm|mov)$/i.test(file))
-    .sort()
-    .map(file => `/gallery/${folder}/${file}`);
+    .sort((a, b) => { 
+      // Extract number from "[123]..." for sorting first
+      const getOrder = (name: string) => {
+        const match = name.match(/^\[(\d+)\]/);
+        return match ? parseInt(match[1], 10) : Infinity;
+      };
+
+      const orderA = getOrder(a);
+      const orderB = getOrder(b);
+
+      // Check order after parsing
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+
+      // If everything goes wrong, go default
+      return a.localeCompare(b);
+    })
+    .map(file => {
+      const userFriendlyName =
+        path.parse(file).name // Remove filename
+        .replace(/^\[\d+\]-*/, '') // Remove ordering prefix (if any)
+        .split('-') // Clear kebab-case
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalizes first letter of words
+        .join(' ');
+
+      const isVideo = /\.(mp4|webm|mov)$/i.test(file);
+
+      return {
+        src: `/gallery/${folder}/${file}`,
+        type: isVideo ? 'video' : 'img',
+        title: userFriendlyName
+      };
+    });
 }
 ---
 
 <aside>
     <div class="gallery-list">
-        {media.map((src) => {
-        const isVideo = /\.(mp4|webm|mov)$/i.test(src);
-        return (
+        {media.map((item) => (
             <div 
             class="gallery-item cursor-pointer"
-            data-src={src}
-            data-type={isVideo ? 'video' : 'img'}
+            data-src={item.src}
+            data-type={item.type}
+            data-title={item.title}
             >
-            {isVideo ? (
-                <video muted loop playsinline autoplay src={src} />
+            {item.type === 'video' ? (
+                <video muted loop playsinline autoplay src={item.src} />
             ) : (
-                <img src={src} alt="Gallery Media" loading="lazy" />
+                <img src={item.src} alt={item.title} loading="lazy" />
             )}
-                <div class="zoom-icon"><i class="fa-solid fa-expand"></i></div>
+
+              <div class="zoom-icon"><i class="fa-solid fa-expand"></i></div>
+
+              <div class="tooltip">
+                <span>{item.title}</span>
+              </div>
+
             </div>
-        );
-        })}
+        ))}
     </div>
   </aside>
 
 <dialog id="lightbox-modal">
   <div class="lightbox-content">
-    <button id="close-lightbox" class="close-btn">
-      <i class="fa-solid fa-square-xmark"></i>
-    </button>
-    <div id="lightbox-media-container"></div>
+
+    <div id="lightbox-media-container">
+      
+        <button id="close-lightbox" class="close-btn">
+          <i class="fa-solid fa-square-xmark"></i>
+        </button>
+
+        <video id="lightbox-media-video" 
+        src = ""
+        controls,
+        autoplay/>
+
+        <img id ="lightbox-media-img"
+        src = ""/>
+        
+        <div class="tooltip">
+          <span id="lightbox-media-title"/>
+        </div>
+        
+      </div>
+
   </div>
 </dialog>
 
 <script>
   // Runs only once per page load
   const dialog = document.getElementById('lightbox-modal') as HTMLDialogElement | null;
-  const container = document.getElementById('lightbox-media-container');
   const closeBtn = document.getElementById('close-lightbox');
   const triggers = document.querySelectorAll('.gallery-item');
+  const vid = document.getElementById('lightbox-media-video') as HTMLVideoElement;
+  const img = document.getElementById('lightbox-media-img') as HTMLImageElement;
 
-function openLightbox(src: string, type: string | null) {
-        if (!container || !dialog) return;
-    container.innerHTML = '';
+function openLightbox(src: string, type: string | null, title: string | null) {
+    if (!dialog) return;
+
 
     if (type === 'video') {
-      const vid = document.createElement('video');
       vid.src = src;
-      vid.controls = true;
-      vid.autoplay = true;
-      vid.style.maxHeight = '90vh';
-      vid.style.maxWidth = '100%';
-      container.appendChild(vid);
+      vid.currentTime = 0; // Rewind
+      vid.style.display = "block";
+      img.style.display = "none";
+      vid.play();
     } else {
-      const img = document.createElement('img');
       img.src = src;
-      img.style.maxHeight = '90vh';
-      img.style.maxWidth = '100%';
-      img.style.objectFit = 'contain';
-      container.appendChild(img);
+      img.style.display = "block";
+      vid.style.display = "none";
+      vid.pause(); // Ensure it'll not be playing
     }
+
+    if(title) {
+      const tooltipSpan = document.getElementById('lightbox-media-title') as HTMLSpanElement;
+      tooltipSpan.textContent = title
+    }
+    
     dialog.showModal();
   }
 
+
   function closeLightbox() {
-    if (!dialog || !container) return;
+    if (!dialog) return;
     dialog.close();
-    container.innerHTML = '';
+    vid.pause()
   }
 
   // Event Listeners
@@ -92,9 +157,10 @@ function openLightbox(src: string, type: string | null) {
       const el = trigger as Element; // Cast 'trigger' to Element to access getAttribute safely
       const src = el.getAttribute('data-src');
       const type = el.getAttribute('data-type');
+      const title = el.getAttribute('data-title');
       // Only open if src exists
       if (src) {
-        openLightbox(src, type);
+        openLightbox(src, type, title);
       }
     });
   });
@@ -168,10 +234,15 @@ function openLightbox(src: string, type: string | null) {
   dialog {
     border: none;
     background: transparent;
-    padding: 0;
-    max-width: 95vw;
-    max-height: 95vh;
     outline: none;
+    padding: 0;
+    overflow: hidden;
+
+    /* Fullscreen */
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
   }
 
   dialog::backdrop {
@@ -180,28 +251,113 @@ function openLightbox(src: string, type: string | null) {
   }
 
   .lightbox-content {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  #lightbox-media-container {
+    justify-items: center;
+    align-content: center;
+    text-align: center;
+    
+    display: inline-grid;
+    grid-template-columns: 100%;,
+    grid-template-rows: auto auto;
+
+    max-height: 80vh;
+    max-width: 90vw;
+    position: relative;
+    pointer-events: none;
   }
 
   .close-btn {
-    position: absolute;
-    top: 0; 
-    right: 0;
+    position: relative;
+    justify-self: end;
+    align-self: start;
+    grid-column: 2;
+    grid-row: 1;
 
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(197, 197, 197, 0.25);
     font-size: 2rem;
-
+    line-height: 1;
     cursor: pointer;
     z-index: 10;
+    pointer-events: all;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
   }
 
   .close-btn:hover {
-  color: rgba(195, 0, 255, 1);
-}
+    color: rgb(248, 248, 248);
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0) 100%);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 40px 10px 10px;
+    
+    /* Animation settings */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .gallery-item:hover .tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #lightbox-media-container :global(.tooltip) {
+    opacity: 1;
+
+    background: none;
+    color: white;
+
+    font-size: 1.2rem;
+    padding: 15px 0;
+    
+    position: relative;
+    transform: none;
+    bottom: auto;
+    left: auto;
+
+    grid-column: 1;
+    grid-row: 2;
+
+    width: 0; 
+    min-width: 100%;
+  }
+
+  #lightbox-media-container :global(img), 
+  #lightbox-media-container :global(video) {
+    grid-column: 1;
+    grid-row: 1;
+
+    object-fit: contain;
+    display: block;
+    pointer-events: all;
+    
+    width: auto;
+    height: auto;
+    max-width: 90vw; 
+    max-height: 75vh;
+
+    justify-self: center;
+  }
 </style>
