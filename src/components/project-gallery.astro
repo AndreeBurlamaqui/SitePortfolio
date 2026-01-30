@@ -90,23 +90,24 @@ if (fs.existsSync(folderPath)) {
 
     <div id="lightbox-media-container">
       
-      <button id="close-lightbox" class="close-btn">
-        <i class="fa-solid fa-square-xmark"></i>
-      </button>
+        <button id="close-lightbox" class="close-btn">
+          <i class="fa-solid fa-square-xmark"></i>
+        </button>
 
-      <video id="lightbox-media-video" 
-      src = ""
-      controls,
-      autoplay/>
+        <video id="lightbox-media-video" 
+        src = ""
+        controls,
+        autoplay/>
 
-      <img id ="lightbox-media-img"
-      src = ""/>
-
-      <div class="tooltip">
-        <span id="lightbox-media-title"/>
+        <img id ="lightbox-media-img"
+        src = ""/>
+        
+        <div class="tooltip">
+          <span id="lightbox-media-title"/>
+        </div>
+        
       </div>
 
-    </div>
   </div>
 </dialog>
 
@@ -264,8 +265,8 @@ function openLightbox(src: string, type: string | null, title: string | null) {
     text-align: center;
     
     display: inline-grid;
-    grid-template-columns: 100%;
-    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-columns: 100%;,
+    grid-template-rows: auto auto;
 
     max-height: 80vh;
     max-width: 90vw;
@@ -274,14 +275,15 @@ function openLightbox(src: string, type: string | null, title: string | null) {
   }
 
   .close-btn {
-    grid-column: 1;
-    grid-row: 1;
+    position: relative;
     justify-self: end;
     align-self: start;
+    grid-column: 2;
+    grid-row: 1;
 
     background: none;
     border: none;
-    color: rgba(0, 0, 0, 0.25);
+    color: rgba(197, 197, 197, 0.25);
     font-size: 2rem;
     line-height: 1;
     cursor: pointer;
@@ -291,7 +293,7 @@ function openLightbox(src: string, type: string | null, title: string | null) {
   }
 
   .close-btn:hover {
-    color: rgb(231, 231, 231);
+    color: rgb(248, 248, 248);
   }
 
   .tooltip {
@@ -328,7 +330,7 @@ function openLightbox(src: string, type: string | null, title: string | null) {
     color: white;
 
     font-size: 1.2rem;
-    padding: 15px 0px;
+    padding: 15px 0;
     
     position: relative;
     transform: none;
@@ -349,11 +351,12 @@ function openLightbox(src: string, type: string | null, title: string | null) {
 
     object-fit: contain;
     display: block;
+    pointer-events: all;
+    
     width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    pointer-events: all;
+    max-width: 90vw; 
+    max-height: 75vh;
 
     justify-self: center;
   }
