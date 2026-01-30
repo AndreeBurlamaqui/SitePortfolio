@@ -22,15 +22,30 @@ let media: MediaItem[] = [];
 if (fs.existsSync(folderPath)) {
   media = fs.readdirSync(folderPath)
     .filter(file => /\.(png|jpe?g|webp|gif|mp4|webm|mov)$/i.test(file))
-    .sort()
+    .sort((a, b) => { 
+      // Extract number from "[123]..." for sorting first
+      const getOrder = (name: string) => {
+        const match = name.match(/^\[(\d+)\]/);
+        return match ? parseInt(match[1], 10) : Infinity;
+      };
+
+      const orderA = getOrder(a);
+      const orderB = getOrder(b);
+
+      // Check order after parsing
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+
+      // If everything goes wrong, go default
+      return a.localeCompare(b);
+    })
     .map(file => {
-      // Clean the filename
-      const nameWithoutExt = path.parse(file).name;
-      
-      // Replaces hyphens with spaces and Capitalizes First Letter of words (Optional)
-      const userFriendlyName = nameWithoutExt
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      const userFriendlyName =
+        path.parse(file).name // Remove filename
+        .replace(/^\[\d+\]-*/, '') // Remove ordering prefix (if any)
+        .split('-') // Clear kebab-case
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalizes first letter of words
         .join(' ');
 
       const isVideo = /\.(mp4|webm|mov)$/i.test(file);
