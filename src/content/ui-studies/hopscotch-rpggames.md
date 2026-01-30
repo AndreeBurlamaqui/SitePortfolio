@@ -29,12 +29,39 @@ extraTechStack:
 ## About the Project
 This project was developed as part of an internal Research & Development initiative. Due to strict non-disclosure agreements (NDA), specific client details and strategic applications cannot be shared. However, these prototypes serve to demonstrate our technical capabilities in UI architecture and the specific visual styles or game genres requested by the client.
 
-## My Contribution
-Focus on what **YOU** did. Since you are a Lead, talk about:
-* Architecture decisions.
-* Team management or code reviews.
-* Specific complex systems you built (e.g., the inventory system, the optimization pipeline).
+1. Contextual Action Bar
 
-## Technical Challenges
-* **Challenge 1:** Describe a hard bug or performance issue.
-* **Solution:** How you fixed it.
+<video height=500px autoplay loop muted playsinline controls>
+  <source src="/attachments/hopscotch-rpggames/contextual-action-bar.webm" type="video/webm" />
+</video>
+<video height=500px autoplay loop muted playsinline controls>
+  <source src="/attachments/hopscotch-rpggames/over-head-action-bar.webm" type="video/webm" />
+</video>
+
+2. Tooltips, popups and tags
+
+  <video height=500px autoplay loop muted playsinline controls>
+    <source src="/attachments/hopscotch-rpggames/tooltips.webm" type="video/webm" />
+  </video>
+  <video height=500px autoplay loop muted playsinline controls>
+    <source src="/attachments/hopscotch-rpggames/popup.webm" type="video/webm" />
+  </video>
+  <video height=500px autoplay loop muted playsinline controls>
+    <source src="/attachments/hopscotch-rpggames/tags.webm" type="video/webm" />
+  </video>
+
+3. Expandable and modular skill tree with circle layout
+
+  <video height=500px autoplay loop muted playsinline controls>
+    <source src="/attachments/hopscotch-rpggames/skilltree.webm" type="video/webm" />
+  </video>
+    <video height=500px autoplay loop muted playsinline controls>
+    <source src="/attachments/hopscotch-rpggames/modular-skilltree.mp4" type="video/mp4" />
+  </video>
+
+4. Clickable world-spaced UI and particles
+
+</video>
+    <video height=500px autoplay loop muted playsinline controls>
+    <source src="/attachments/hopscotch-rpggames/particlesui.mp4" type="video/mp4" />
+  </video>
