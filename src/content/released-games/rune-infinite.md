@@ -32,8 +32,8 @@ Designed the UX and implemented all of the UI in game. Assets were from packs.
 <details>
 <summary>Skill Bind UI (click to expand)</summary>
 
-- Skill Bind was inspired by [Ashen Inventory UI](https://www.gameuidatabase.com/gameData.php?id=302&autoload=9824)
-![Skill bind UI](../../assets/attachments/rune-infinite/uiblocktest.gif)
+- Skill Bind was inspired by [Ashen Inventory UI](https://www.gameuidatabase.com/gameData.php?id=302&autoload=9824)<br>
+![Skill bind UI](/attachments/rune-infinite/uiblocktest.gif)
 1. Every skill should show info about their damage, cooldown and cost;
 2. Slots were based on type (6 attack, 4 utility and 2 movement)
 3. Each page is known as "Gear". Gears could be created as much as the player wanted. Gears could ne renamed.
@@ -49,10 +49,10 @@ Supports both *Keyboard and Mouse* or *Gamepad*. Players could change their inpu
 <summary>Keyboard, Mouse and Gamepad: Movement (click to expand)</summary>
 
 - When using *Mouse* to move, you could select where you want to go, similar to MOBA or RTS games.
-![Movement indication arrow](../../assets/attachments/rune-infinite/destinationarrow.gif)!
+![Movement indication arrow](/attachments/rune-infinite/destinationarrow.gif)!
 
 - When using *Keyboard* or *Gamepad* to move. It'd do some pathfinding check every few frames to make it smooth and also avoid obstacles.
-![Pathfinding movement](../../assets/attachments/rune-infinite/movementWASD.gif)
+![Pathfinding movement](/attachments/rune-infinite/movementWASD.gif)
 
 </details>
 
@@ -61,6 +61,6 @@ Supports both *Keyboard and Mouse* or *Gamepad*. Players could change their inpu
 
 During battle, on *Keyboard and Mouse*, the player would aim with mouse, giving direction and/or spot to spawn. On *Gamepad*, it would aim with the right joystick, and the spot to spawn would be a few units away from the player, with a valid position checker to get the proper place to spawn.
 Since we got *12 Skills* and *1 Ultimate* for the player to choose to use, on Gamepad we access the other 6 skills by holding a trigger key (usually RT/R2).
-![Battle controls](../../assets/attachments/rune-infinite/battlegamepadkbm.gif)
+![Battle controls](/attachments/rune-infinite/battlegamepadkbm.gif)
 
 </details>
