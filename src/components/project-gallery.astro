@@ -94,6 +94,18 @@ if (fs.existsSync(folderPath)) {
         <i class="fa-solid fa-square-xmark"></i>
       </button>
 
+      <video id="lightbox-media-video" 
+      src = ""
+      controls,
+      autoplay/>
+
+      <img id ="lightbox-media-img"
+      src = ""/>
+
+      <div class="tooltip">
+        <span id="lightbox-media-title"/>
+      </div>
+
     </div>
   </div>
 </dialog>
@@ -101,52 +113,41 @@ if (fs.existsSync(folderPath)) {
 <script>
   // Runs only once per page load
   const dialog = document.getElementById('lightbox-modal') as HTMLDialogElement | null;
-  const container = document.getElementById('lightbox-media-container');
   const closeBtn = document.getElementById('close-lightbox');
   const triggers = document.querySelectorAll('.gallery-item');
+  const vid = document.getElementById('lightbox-media-video') as HTMLVideoElement;
+  const img = document.getElementById('lightbox-media-img') as HTMLImageElement;
 
 function openLightbox(src: string, type: string | null, title: string | null) {
-        if (!container || !dialog) return;
+    if (!dialog) return;
 
 
-    // Remove old media/tooltips
-    cleanUpLightbox();
-
-    let media;
     if (type === 'video') {
-      const vid = document.createElement('video');
       vid.src = src;
-      vid.controls = true;
-      vid.autoplay = true;
-      media = vid;
+      vid.currentTime = 0; // Rewind
+      vid.style.display = "block";
+      img.style.display = "none";
+      vid.play();
     } else {
-      const img = document.createElement('img');
       img.src = src;
-      media = img;
+      img.style.display = "block";
+      vid.style.display = "none";
+      vid.pause(); // Ensure it'll not be playing
     }
-    container.appendChild(media);
 
     if(title) {
-      const tooltipDiv = document.createElement('div');
-      tooltipDiv.classList.add("tooltip");
-      tooltipDiv.innerHTML = `<span>${title}</span>`;
-      container.appendChild(tooltipDiv);
+      const tooltipSpan = document.getElementById('lightbox-media-title') as HTMLSpanElement;
+      tooltipSpan.textContent = title
     }
     
     dialog.showModal();
   }
 
-function cleanUpLightbox() {
-  if(!container) return;
-
-  const oldMedia = container.querySelectorAll('img, video, .tooltip');
-  oldMedia.forEach(el => el.remove());
-}
 
   function closeLightbox() {
-    if (!dialog || !container) return;
+    if (!dialog) return;
     dialog.close();
-    cleanUpLightbox();
+    vid.pause()
   }
 
   // Event Listeners
