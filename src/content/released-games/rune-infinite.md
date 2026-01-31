@@ -30,7 +30,7 @@ Section            | Description
 ## UI <a name="ui"></a>
 Designed the UX and implemented all of the UI in game. Assets were from packs.
 <details>
-<summary>Skill Bind UI (click to expand)</summary>
+<summary>Skill Library</summary>
 
 - Skill Bind was inspired by [Ashen Inventory UI](https://www.gameuidatabase.com/gameData.php?id=302&autoload=9824)
 ![Skill bind UI](../../assets/attachments/rune-infinite/uiblocktest.gif)
@@ -46,7 +46,7 @@ Designed the UX and implemented all of the UI in game. Assets were from packs.
 Supports both *Keyboard and Mouse* or *Gamepad*. Players could change their input choice at any time at runtime.
 
 <details>
-<summary>Keyboard, Mouse and Gamepad: Movement (click to expand)</summary>
+<summary>Keyboard, Mouse and Gamepad: Movement</summary>
 
 - When using *Mouse* to move, you could select where you want to go, similar to MOBA or RTS games.
 ![Movement indication arrow](../../assets/attachments/rune-infinite/destinationarrow.gif)!
@@ -57,7 +57,7 @@ Supports both *Keyboard and Mouse* or *Gamepad*. Players could change their inpu
 </details>
 
 <details>
-<summary>Keyboard, Mouse and Gamepad: On Battle (click to expand)</summary>
+<summary>Keyboard, Mouse and Gamepad: On Battle</summary>
 
 During battle, on *Keyboard and Mouse*, the player would aim with mouse, giving direction and/or spot to spawn. On *Gamepad*, it would aim with the right joystick, and the spot to spawn would be a few units away from the player, with a valid position checker to get the proper place to spawn.
 Since we got *12 Skills* and *1 Ultimate* for the player to choose to use, on Gamepad we access the other 6 skills by holding a trigger key (usually RT/R2).
