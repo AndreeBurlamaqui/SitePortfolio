@@ -74,6 +74,31 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
   </body>
 </html>
 
+<script>
+
+// Center page when details is toggled
+document.querySelectorAll('details').forEach((detail) => {
+  detail.addEventListener('toggle', () => {
+    if (detail.open) {
+      // Wait slightly for the browser to recognize the new size
+      setTimeout(() => {
+        const elementHeight = detail.offsetHeight;
+        const windowHeight = window.innerHeight;
+
+        if (elementHeight > windowHeight) {
+          // If the content is taller than the screen, align to TOP
+          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          // If it fits, align to CENTER
+          detail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100); // Delay ensures the animation has started properly
+    }
+  });
+});
+
+</script>
+
 <style>
   /* --- GLOBAL LAYOUT STYLES --- */
   body { margin: 0; font-family: sans-serif; }
