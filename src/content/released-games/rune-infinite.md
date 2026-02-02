@@ -30,134 +30,150 @@ Section            | Description
 ## UI <a name="ui"></a>
 Designed the UX and implemented all of the UI in game. Assets were from packs.
 
-<details>
-<summary>Skill Library</summary>
+### Skill Library
 
 - Skill Bind was inspired by [Ashen Inventory UI](https://www.gameuidatabase.com/gameData.php?id=302&autoload=9824)
 
-  <video height=500px autoplay loop muted playsinline controls>
+<div class="split-layout">
+  
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-SkillLibrary.mp4" type="video/mp4" />
   </video>
 
+<div>
+
+Requirements:
 1. Every skill should show info about their damage, cooldown and cost;
 2. Slots were based on type (6 attack, 4 utility and 2 movement)
 3. Each page is known as "Gear". Gears could be created as much as the player wanted. Gears could ne renamed.
 4. Skills could be searched by their names
 5. Inputs would automatically update on binding or input change 
 
-</details>
+</div>
 
-<details>
-<summary>Notification Queue</summary>
+</div>
 
-It can be stacked, and will be showing until it reaches the limit, which then will be send to the queue. Other videos in this project also showcase the notification system, such as the [Keyboard, Mouse and Gamepad: On Battle](#input-on-battle).
-
-Some notifications could be set to be permanent until canceled manually by code. Others had timers set on creation, and the UI shows which is which.
-
-  <video height=500px autoplay loop muted playsinline controls>
+<h3>Notification Queue</h3>
+<div class="split-layout">
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-NotificationQueue.mp4" type="video/mp4" />
   </video>
 
-</details>
+  <div>
+    <p>It can be stacked, and will be showing until it reaches the limit, which then will be sent to the queue. Other videos in this project also showcase the notification system, such as the <a href="#input-on-battle">Keyboard, Mouse and Gamepad: On Battle</a>.</p>
+    <p>Some notifications could be set to be permanent until canceled manually by code. Others had timers set on creation, and the UI shows which is which.</p>
+  </div>
+</div>
 
-<details>
-<summary>Rebind UI</summary>
+<hr>
 
-The rebinding system also notified the player when there was some overlapping bind, and didn't allow the player to continue (and save the configuration).
-
-Everything had an explanation of what it represents on changing, that updated on hover.
-
-On rebind, or on main input change (keyboard/mouse < > gamepad), input guides on every screen would update accordingly, showcasing the bind that represents a given action, e.g. esc/triangle to go back.
-
-  <video height=500px autoplay loop muted playsinline controls>
+<h3>Rebind UI</h3>
+<div class="split-layout">
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-RebindUI.mp4" type="video/mp4" />
   </video>
 
-</details>
+  <div>
+    <p>The rebinding system also notified the player when there was some overlapping bind, and didn't allow the player to continue (and save the configuration).</p>
+    <p>Everything had an explanation of what it represents on changing, that updated on hover.</p>
+    <p>On rebind, or on main input change (keyboard/mouse < > gamepad), input guides on every screen would update accordingly, showcasing the bind that represents a given action, e.g. esc/triangle to go back.</p>
+  </div>
+</div>
 
-<details>
-<summary>Gamepad Control In-Game</summary>
+<hr>
 
-To access shortcuts in-game, such as skill library and character stats. On Gamepad, the player would have a "open side bar" bind (in this case, the left arrow), which would teleport the cursor to the sidebar and open it. 
-
-This activates the digital cursor, which allows the player to navigate the UI on gamepad.
-To deactivate the cursor, moving out of UI State to Gameplay State, the player just needed to press the "back bind", (in this case, the north button, triangle).
-
-  <video height=500px autoplay loop muted playsinline controls>
+<h3>Gamepad Control In-Game</h3>
+<div class="split-layout">
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-GamepadSidebar.mp4" type="video/mp4" />
   </video>
 
-</details>
+  <div>
+    <p>To access shortcuts in-game, such as skill library and character stats. On Gamepad, the player would have a "open side bar" bind (in this case, the left arrow), which would teleport the cursor to the sidebar and open it.</p>
+    <p>This activates the digital cursor, which allows the player to navigate the UI on gamepad. To deactivate the cursor, moving out of UI State to Gameplay State, the player just needed to press the "back bind", (in this case, the north button, triangle).</p>
+  </div>
+</div>
 
-<details>
-<summary>Buff and Debuff Tooltips and Icons</summary>
+<hr>
 
-When affected by a conditional effect, an icon would show above the player character, and when valid, on the top bar.
-
-These icons have different border to indicate if the conditional is in favour or against.
-
-These icons can be hovered to see tooltips.
-
-  <video height=500px autoplay loop muted playsinline controls>
+<h3>Buff and Debuff Tooltips and Icons</h3>
+<div class="split-layout">
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-BuffDebuff.mp4" type="video/mp4" />
   </video>
 
-</details>
+  <div>
+    <p>When affected by a conditional effect, an icon would show above the player character, and when valid, on the top bar.</p>
+    <p>These icons have different border to indicate if the conditional is in favour or against.</p>
+    <p>These icons can be hovered to see tooltips.</p>
+  </div>
+</div>
 
-<details>
-<summary>Round Over UI Animation</summary>
+<hr>
 
-When a round is over, either by time or by killing, a transition screen animation would play. This screen showcases the who that won, and what happened to the player. Texts would also change to tell the player if the enemy has quit.
-
-By being a best of 3, it will at first show only 2 "orb points" for each. If both win a round, it shows the third "orb point" that is used as tiebreaker.
-
-Also used as a lazy-loading screen. So the screen only transition back to the game when allowed by the battle manager, which tells that everything is ready for the next round.
-
-All done using manual tweening using Coroutines.
-
-  <video height=500px autoplay loop muted playsinline controls>
+<h3>Round Over UI Animation</h3>
+<div class="split-layout">
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-RoundOverScreen.mp4" type="video/mp4" />
   </video>
 
-</details>
+  <div>
+    <p>When a round is over, either by time or by killing, a transition screen animation would play. This screen showcases the who that won, and what happened to the player. Texts would also change to tell the player if the enemy has quit.</p>
+    <p>By being a best of 3, it will at first show only 2 "orb points" for each. If both win a round, it shows the third "orb point" that is used as tiebreaker.</p>
+    <p>Also used as a lazy-loading screen. So the screen only transition back to the game when allowed by the battle manager, which tells that everything is ready for the next round.</p>
+    <p>All done using manual tweening using Coroutines.</p>
+  </div>
+</div>
 
-<details>
-<summary>Game Over UI Animation</summary>
+<hr>
 
-After the last round. The game would transition to the a statistics screen of the battle. Telling which skill did the most damage and how much it was used.
-
-Also displaying the floor (the ranks in the game), if any of the players advanced or regressed and by how much, changing the button to explicitely tell what happened ("Next Floor" or "Previous Floor").
-
-The moving background texture is done by shader, on a UI with a custom material.
-
-  <video height=500px autoplay loop muted playsinline controls>
+<h3>Game Over UI Animation</h3>
+<div class="split-layout">
+  <video autoplay loop muted playsinline controls>
     <source src="/attachments/rune-infinite/Infinite-BattleOverScreen.mp4" type="video/mp4" />
   </video>
 
-</details>
+  <div>
+    <p>After the last round. The game would transition to the a statistics screen of the battle. Telling which skill did the most damage and how much it was used.</p>
+    <p>Also displaying the floor (the ranks in the game), if any of the players advanced or regressed and by how much, changing the button to explicitely tell what happened ("Next Floor" or "Previous Floor").</p>
+    <p>The moving background texture is done by shader, on a UI with a custom material.</p>
+  </div>
+</div>
+
+<hr>
 
 ## INPUT <a name="input"></a>
 Supports both *Keyboard and Mouse* or *Gamepad*. Players could change their input choice at any time at runtime.
 
-<details>
-<summary>Keyboard, Mouse and Gamepad: Movement</summary>
+<h3>Keyboard, Mouse and Gamepad: Movement</h3>
 
-- When using *Mouse* to move, you could select where you want to go, similar to MOBA or RTS games.
+<div class="split-layout">
+  <img src="/attachments/rune-infinite/destinationarrow.gif" alt="Movement indication arrow">
+  <div>
+    <p>When using <em>Mouse</em> to move, you could select where you want to go, similar to MOBA or RTS games.</p>
+  </div>
+</div>
 
-![Movement indication arrow](../../assets/attachments/rune-infinite/destinationarrow.gif)
+<br>
 
-- When using *Keyboard* or *Gamepad* to move. It'd do some pathfinding check every few frames to make it smooth and also avoid obstacles.
+<div class="split-layout">
 
-![Pathfinding movement](../../assets/attachments/rune-infinite/movementWASD.gif)
+  <img src="/attachments/rune-infinite/movementWASD.gif" alt="Pathfinding movement">
+  
+  <div>
+    <p>When using <em>Keyboard</em> or <em>Gamepad</em> to move. It'd do some pathfinding check every few frames to make it smooth and also avoid obstacles.</p>
+  </div>
+</div>
 
-</details>
+<hr>
 
-<details>
-<summary id="input-on-battle">Keyboard, Mouse and Gamepad: On Battle</summary>
+<h3 id="input-on-battle">Keyboard, Mouse and Gamepad: On Battle</h3>
+<div class="split-layout">
 
-During battle, on *Keyboard and Mouse*, the player would aim with mouse, giving direction and/or spot to spawn. On *Gamepad*, it would aim with the right joystick, and the spot to spawn would be a few units away from the player, with a valid position checker to get the proper place to spawn.
-Since we got *12 Skills* and *1 Ultimate* for the player to choose to use, on Gamepad we access the other 6 skills by holding a trigger key (usually RT/R2).
+  <img src="/attachments/rune-infinite/battlegamepadkbm.gif" alt="Battle controls">
 
-![Battle controls](../../assets/attachments/rune-infinite/battlegamepadkbm.gif)
-
-</details>
+  <div>
+    <p>During battle, on <em>Keyboard and Mouse</em>, the player would aim with mouse, giving direction and/or spot to spawn. On <em>Gamepad</em>, it would aim with the right joystick, and the spot to spawn would be a few units away from the player, with a valid position checker to get the proper place to spawn.</p>
+    <p>Since we got <em>12 Skills</em> and <em>1 Ultimate</em> for the player to choose to use, on Gamepad we access the other 6 skills by holding a trigger key (usually RT/R2).</p>
+  </div>
+</div>
