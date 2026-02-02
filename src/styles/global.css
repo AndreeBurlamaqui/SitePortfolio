@@ -44,3 +44,20 @@ summary::after {
   font-weight: bolder;
   padding-left: 5px;
 }
+
+.split-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Smart wrapping */
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.split-layout img,
+.split-layout video {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-width: 175%; 
+}
