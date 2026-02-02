@@ -82,8 +82,10 @@ details[open] summary::after {
 
 /* --- 4. Content Styling & Animation --- */
 details[open] > *:not(summary) {
-  animation: fade-in 0.25s ease-in-out;
-}
+animation: 
+    fade-in 0.25s ease-out,
+    slide-down 0.15s ease-out;
+  }
 
 /* Generic styling to make your Markdown look good */
 details > *:not(summary) {
@@ -101,8 +103,13 @@ details img {
   margin-top: 1rem;
 }
 
-/* --- 5. Global Keyframe Animation --- */
+/* --- Keyframe animations --- */
 @keyframes fade-in {
-  0% { opacity: 0; transform: translateY(-5px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slide-down {
+  0% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
