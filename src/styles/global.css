@@ -59,5 +59,16 @@ summary::after {
   height: auto;
   border: 1px solid #ddd;
   border-radius: 6px;
-  max-width: 175%; 
+}
+
+.split-layout:nth-of-type(even) {
+  grid-template-columns: 1fr 1.5fr; /* Right is wider now */
+}
+
+.split-layout:nth-of-type(even) > *:first-child {
+  order: 2; /* Move Video/Image to the right */
+}
+
+.split-layout:nth-of-type(even) > *:last-child {
+  order: 1; /* Move Text to the left */
 }
