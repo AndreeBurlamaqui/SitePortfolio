@@ -47,7 +47,7 @@ summary::after {
 
 .split-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Smart wrapping */
+  grid-template-columns: 1.5fr 1fr;
   gap: 1.5rem;
   align-items: center;
   margin-top: 1rem;
