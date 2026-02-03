@@ -40,10 +40,45 @@ const { Content } = await entry.render();
 
     </div>
 
-    <ProjectGallery folder={entry.slug} />
+    <div>
+
+      <div id="table-of-contents" class="summary">
+      <h3>Summary</h3>
+      </div>
+      
+      <ProjectGallery folder={entry.slug} />
+
+    </div>
 
   </article>
 </BaseLayout>
+
+<script>
+  // Automatic summary / table of contents
+  document.addEventListener("DOMContentLoaded", () => {
+  const tocContainer = document.getElementById("table-of-contents");
+  if (tocContainer){
+    const headers = document.querySelectorAll("main h1, main h2, main h3");
+
+    // Create links
+    headers.forEach(header => {
+      // If header has no ID, create one from the text (e.g., "My Title" -> "my-title")
+      if (!header.id) {
+        header.id = header.innerText.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+      }
+
+      // Create the link
+      const link = document.createElement("a");
+      link.href = `#${header.id}`;
+      link.innerText = header.innerText;
+      
+      link.classList.add(`toc-${header.tagName.toLowerCase()}`);
+
+      tocContainer.appendChild(link);
+    });
+  }
+});
+</script>
 
 <style>
   /* LAYOUT CONTAINER */
@@ -72,6 +107,43 @@ const { Content } = await entry.render();
     border-radius: 8px;
   }
 
+
+  /* Sidebar Styling */
+.summary {
+  position: sticky;
+  top: 1rem;
+  height: fit-content; /* Required for sticky to work */
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.summary :global(h3) {
+  margin-top: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary :global(a) {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.summary :global(a:hover) {
+  color: #007bff; /* Blue on hover */
+}
+
+/* Indent sub-headers automatically */
+.toc-h2 { padding-left: 1rem; font-size: 0.85rem; }
+.toc-h3 { padding-left: 2rem; font-size: 0.8rem; color: #666; }
 
   /* Responsive Fix for Mobile */
   @media screen and (max-width: 768px) {
