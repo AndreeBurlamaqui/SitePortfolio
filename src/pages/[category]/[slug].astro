@@ -67,6 +67,8 @@ const { Content } = await entry.render();
   const tocContainer = document.getElementById("table-of-contents");
   if (tocContainer){
     const headers = document.querySelectorAll(".content-body h1, .content-body h2, .content-body h3") as NodeListOf<HTMLElement>;
+    const tagLevels = Array.from(headers).map(h => parseInt(h.tagName.substring(1)));
+    const minLevel = tagLevels.length > 0 ? Math.min(...tagLevels) : 1;
     let counters = [0, 0, 0, 0, 0, 0];
 
     // Create links
@@ -76,17 +78,18 @@ const { Content } = await entry.render();
         header.id = header.innerText.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
       }
 
-      // Counter to add x.y section
-      const level = parseInt(header.tagName.substring(1)) - 1;
-      counters[level]++;
+
+      // Normalize the level based on the minimum found
+      const normalizedLevel = parseInt(header.tagName.substring(1)) - minLevel;
+      counters[normalizedLevel]++;
 
         // Reset all lower levels (if we hit H2, reset H3, H4...)
-        for (let i = level + 1; i < counters.length; i++) {
+        for (let i = normalizedLevel + 1; i < counters.length; i++) {
           counters[i] = 0;
         }
 
         let numberString = "";
-        for (let i = 0; i <= level; i++) {
+        for (let i = 0; i <= normalizedLevel; i++) {
           numberString += counters[i] + ".";
         }
 
@@ -94,8 +97,9 @@ const { Content } = await entry.render();
       const link = document.createElement("a");
       link.href = `#${header.id}`;
       link.innerText = `${numberString} ${header.innerText}`;
-      
-      link.classList.add(`toc-${header.tagName.toLowerCase()}`);
+
+      const cssLevel = normalizedLevel + 1;
+      link.classList.add(`toc-h${cssLevel}`);
 
       tocContainer.appendChild(link);
     });
@@ -181,8 +185,8 @@ const { Content } = await entry.render();
 }
 
 /* Indent sub-headers automatically */
-.toc-h2 { padding-left: 1rem; font-size: 0.85rem; }
-.toc-h3 { padding-left: 2rem; font-size: 0.8rem; color: #666; }
+.toc :global(.toc-h1) { font-size: 0.85rem; }
+.toc :global(.toc-h2) { padding-left: 1rem; font-size: 0.8rem; }
 
 .gallery-wrapper {
   flex-grow: 1;  /* Grow to fill all empty space */
