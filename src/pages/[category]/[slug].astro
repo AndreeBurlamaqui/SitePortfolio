@@ -42,7 +42,7 @@ const { Content } = await entry.render();
 
     <div>
 
-      <div id="table-of-contents" class="summary">
+      <div id="table-of-contents" class="toc">
       <h3>Summary</h3>
       </div>
       
@@ -123,8 +123,7 @@ const { Content } = await entry.render();
   }
 
 
-  /* Sidebar Styling */
-.summary {
+.toc {
   position: sticky;
   top: 1rem;
   height: fit-content; /* Required for sticky to work */
@@ -134,7 +133,7 @@ const { Content } = await entry.render();
   border: 1px solid #ddd;
 }
 
-.summary :global(h3) {
+.toc :global(h3) {
   margin-top: 0;
   font-size: 1rem;
   text-transform: uppercase;
@@ -143,7 +142,7 @@ const { Content } = await entry.render();
   flex-direction: column;
 }
 
-.summary :global(a) {
+.toc :global(a) {
   display: block;
   text-decoration: none;
   color: #333;
@@ -152,7 +151,7 @@ const { Content } = await entry.render();
   transition: color 0.2s;
 }
 
-.summary :global(a:hover) {
+.toc :global(a:hover) {
   color: #007bff; /* Blue on hover */
 }
 
