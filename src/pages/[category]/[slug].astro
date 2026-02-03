@@ -59,6 +59,7 @@ const { Content } = await entry.render();
   const tocContainer = document.getElementById("table-of-contents");
   if (tocContainer){
     const headers = document.querySelectorAll("main h1, main h2, main h3");
+    let counters = [0, 0, 0, 0, 0, 0];
 
     // Create links
     headers.forEach(header => {
@@ -67,10 +68,24 @@ const { Content } = await entry.render();
         header.id = header.innerText.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
       }
 
+      // Counter to add x.y section
+      const level = parseInt(header.tagName.substring(1)) - 1;
+      counters[level]++;
+
+        // Reset all lower levels (if we hit H2, reset H3, H4...)
+        for (let i = level + 1; i < counters.length; i++) {
+          counters[i] = 0;
+        }
+
+        let numberString = "";
+        for (let i = 0; i <= level; i++) {
+          numberString += counters[i] + ".";
+        }
+
       // Create the link
       const link = document.createElement("a");
       link.href = `#${header.id}`;
-      link.innerText = header.innerText;
+      link.innerText = `${numberString} ${header.innerText}`;
       
       link.classList.add(`toc-${header.tagName.toLowerCase()}`);
 
