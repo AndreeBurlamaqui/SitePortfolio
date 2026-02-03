@@ -58,7 +58,7 @@ const { Content } = await entry.render();
   document.addEventListener("DOMContentLoaded", () => {
   const tocContainer = document.getElementById("table-of-contents");
   if (tocContainer){
-    const headers = document.querySelectorAll("main h1, main h2, main h3");
+    const headers = document.querySelectorAll("main h1, main h2, main h3") as NodeListOf<HTMLElement>;
     let counters = [0, 0, 0, 0, 0, 0];
 
     // Create links
