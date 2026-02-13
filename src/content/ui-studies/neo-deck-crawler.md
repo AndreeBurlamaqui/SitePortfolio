@@ -17,7 +17,6 @@ language: "GDScript"                   # C#, C++, GDScript, TypeScript
 # "Important" appears on the card/header (Engines, Frameworks, Architecture)
 importantTechStack: 
   - "Shaders"
-  - "OSS"
 
 
 # Leave these lines commented out if not applicable
