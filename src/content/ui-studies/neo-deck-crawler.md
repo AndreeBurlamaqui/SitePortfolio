@@ -6,7 +6,7 @@ cover: "/cover/cover-neodeckcrawler.png" # Path to your image in /public
 
 # --- METADATA ---
 timeFrame: "Fev 2026"          # User-friendly time frame
-sortDate: 2026-02-03              # What the code uses to sort
+sortDate: "2026-02-03"              # What the code uses to sort
 
 role: "Solo"          # e.g. Solo, Lead Dev, UI Engineer
 status: "In Development"               # Released, In Development, Shelved, Cancelled

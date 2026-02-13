@@ -22,13 +22,13 @@ const baseSchema = z.object({
   //   backgroundClip: z.string().optional(), TODO: Make a background keep running behind title
 
   githubUrl: z.string().url().optional(),
+  itchUrl: z.string().url().optional(),
 });
 
 const gameSchema = baseSchema.extend({
   trailerId: z.string().optional(), // Must always be /embed/
 
   // Where to play links
-  itchUrl: z.string().url().optional(),
   googlePlayUrl: z.string().url().optional(),
   applePlayUrl: z.string().url().optional(),
   steamUrl: z.string().url().optional(),
