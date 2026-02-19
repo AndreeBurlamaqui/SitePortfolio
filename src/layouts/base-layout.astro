@@ -3,7 +3,7 @@
 const { 
   title, 
   description = "Game Developer Portfolio of Andrée Burlamaqui", 
-  image = "/social-preview.png" // You should add a default image to your public folder
+  image = "/social-preview.png" // Default image
 } = Astro.props;
 const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/resume")
 const canonicalURL = new URL(currentPath, Astro.site); // Full URL for social sharing
@@ -16,8 +16,8 @@ const canonicalURL = new URL(currentPath, Astro.site); // Full URL for social sh
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="title" content={`${title} | Andrée Burlamaqui`} />
-    <meta name="description" content={description} />
+    <meta name="title" content={title} />
+    <meta name="description" content="Andrée Burlamaqui's Portfolio" />
     <meta property="og:image" content={new URL(image, canonicalURL)} />
     <title>{title}</title> 
     </head>
