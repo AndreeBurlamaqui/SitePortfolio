@@ -1,7 +1,12 @@
 ---
 // You can add global scripts or styles here if you want
-const { title } = Astro.props;
+const { 
+  title, 
+  image = "/social-preview.png" // Default image
+} = Astro.props;
+const siteBase = Astro.site || Astro.url.origin || "https://burlamaqui.info"; // Fallback to origin if site is not defined
 const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/resume")
+const canonicalURL = new URL(currentPath, siteBase);
 ---
 
 <html lang="en">
@@ -11,6 +16,19 @@ const currentPath = Astro.url.pathname; // Gets the current URL (e.g., "/" or "/
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Andrée Burlamaqui's Portfolio"/>
+    <meta property="og:image" content={new URL(image, siteBase)} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content="Andrée Burlamaqui's Portfolio" />
+    <meta property="twitter:image" content={new URL(image, siteBase)} />
+    
     <title>{title}</title> 
     </head>
   <body>
