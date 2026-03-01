@@ -26,6 +26,7 @@ Section            | Description
 [UI](#ui)          | Explanation about how UI was designed, made and implemented.
 [INPUT](#input)    | Explanation about how Input was designed, made and implemented.
 
+<hr>
 
 ## UI <a name="ui"></a>
 Designed the UX and implemented all of the UI in game. Assets were from packs.
@@ -65,8 +66,6 @@ Requirements:
   </div>
 </div>
 
-<hr>
-
 <h3>Rebind UI</h3>
 <div class="split-layout">
   <video autoplay loop muted playsinline controls>
@@ -80,8 +79,6 @@ Requirements:
   </div>
 </div>
 
-<hr>
-
 <h3>Gamepad Control In-Game</h3>
 <div class="split-layout">
   <video autoplay loop muted playsinline controls>
@@ -93,8 +90,6 @@ Requirements:
     <p>This activates the digital cursor, which allows the player to navigate the UI on gamepad. To deactivate the cursor, moving out of UI State to Gameplay State, the player just needed to press the "back bind", (in this case, the north button, triangle).</p>
   </div>
 </div>
-
-<hr>
 
 <h3>Buff and Debuff Tooltips and Icons</h3>
 <div class="split-layout">
@@ -109,8 +104,6 @@ Requirements:
   </div>
 </div>
 
-<hr>
-
 <h3>Round Over UI Animation</h3>
 <div class="split-layout">
   <video autoplay loop muted playsinline controls>
@@ -124,8 +117,6 @@ Requirements:
     <p>All done using manual tweening using Coroutines.</p>
   </div>
 </div>
-
-<hr>
 
 <h3>Game Over UI Animation</h3>
 <div class="split-layout">
@@ -164,8 +155,6 @@ Supports both *Keyboard and Mouse* or *Gamepad*. Players could change their inpu
     <p>When using <em>Keyboard</em> or <em>Gamepad</em> to move. It'd do some pathfinding check every few frames to make it smooth and also avoid obstacles.</p>
   </div>
 </div>
-
-<hr>
 
 <h3 id="input-on-battle">Keyboard, Mouse and Gamepad: On Battle</h3>
 <div class="split-layout">
