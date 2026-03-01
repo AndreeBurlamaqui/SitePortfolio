@@ -1,13 +1,38 @@
 ---
 import TechTags from './tech-tags.astro';
+import { getGalleryMedia } from '../utils/media';
 
 const { entry, basePath } = Astro.props;
 const { data, slug } = entry;
+const previewMedia = getGalleryMedia(slug).slice(0, 5); // 5 max preview on hover
 ---
 
-<a href={`${basePath}/${slug}`} class="project-card">
+<a href={`${basePath}/${slug}`} class="project-card" data-card>
     
+  <div class="card-preview-wrapper">
+
     <div class="card-image" style={`background-image: url(${data.cover})`}/>
+    
+    {previewMedia.length > 0 && (
+      <div class="card-gallery-slide">
+        {previewMedia.map((item, index) => (
+          item.type === 'video' ? (
+            <video src={item.src} muted loop playsinline class="gallery-preview-item" data-index={index}></video>
+          ) : (
+            <img src={item.src} alt="" loading="lazy" class="gallery-preview-item" data-index={index} />
+          )
+        ))}
+
+        <div class="preview-indicators">
+        {previewMedia.map((_, index) => (
+          <div class="indicator-square" data-indicator-index={index}></div>
+        ))}
+        </div>
+
+      </div>
+    )}
+
+  </div>
 
   <div class="entry-info">
       <h3>{data.title}</h3>
@@ -48,6 +73,67 @@ const { data, slug } = entry;
   </div>
 </a>
 
+<script>
+  // Simple slideshow script for the cards
+  const cards = document.querySelectorAll('[data-card]');
+
+  cards.forEach(card => {
+    let intervalId: number;
+    let currentIndex = 0;
+    const items = card.querySelectorAll('.gallery-preview-item') as NodeListOf<HTMLElement>;
+    const indicators = card.querySelectorAll('.indicator-square') as NodeListOf<HTMLElement>;
+
+    if (items.length === 0) return;
+
+    const updateIndicators = (index: number) => {
+      indicators.forEach((ind, i) => {
+        if (i === index) {
+          ind.classList.add('active');
+        } else {
+          ind.classList.remove('active');
+        }
+      });
+    };
+
+    card.addEventListener('mouseenter', () => {
+      // Show first item immediately
+      items.forEach(el => el.style.opacity = '0');
+      items[currentIndex].style.opacity = '1';
+      updateIndicators(currentIndex); // Set first indicator active
+
+      if (items[currentIndex].tagName === 'VIDEO') (items[currentIndex] as HTMLVideoElement).play();
+
+      // Cycle every few seconds
+      intervalId = window.setInterval(() => {
+        if (items[currentIndex].tagName === 'VIDEO') (items[currentIndex] as HTMLVideoElement).pause();
+        items[currentIndex].style.opacity = '0';
+        
+        currentIndex = (currentIndex + 1) % items.length;
+        updateIndicators(currentIndex);
+
+        items[currentIndex].style.opacity = '1';
+        if (items[currentIndex].tagName === 'VIDEO') (items[currentIndex] as HTMLVideoElement).play();
+      }, 3000);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      clearInterval(intervalId);
+      // Reset everything, let the default cover show
+      items.forEach(el => {
+        el.style.opacity = '0';
+        if (el.tagName === 'VIDEO') {
+          const vid = el as HTMLVideoElement;
+          vid.pause();
+          vid.currentTime = 0;
+        }
+      });
+
+      currentIndex = 0;
+      updateIndicators(currentIndex);
+    });
+  });
+</script>
+
 <style>
   .project-card {
     text-decoration: none;
@@ -65,12 +151,39 @@ const { data, slug } = entry;
     box-shadow: 0 10px 20px rgba(0,0,0,0.08); 
   }
 
-  .card-image {
+  .card-preview-wrapper{
+    position: relative;
     width: 100%;
     height: 250px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+  }
+  .card-image {
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-color: #f0f0f0;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .card-gallery-slide {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none; /* Let the card handle hovers */
+  }
+
+  .gallery-preview-item {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
   }
 
   .card-info { 
@@ -130,5 +243,37 @@ const { data, slug } = entry;
   flex-direction: column;
   justify-content: flex-end; 
 }
+
+
+/* Gallery slideshow preview indicators */
+.preview-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .project-card:hover .preview-indicators {
+    opacity: 1;
+  }
+
+  .indicator-square {
+    width: 5px;
+    height: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: background-color 0.15s ease-in-out;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  }
+
+  .indicator-square.active {
+    background-color: rgba(255, 255, 255, 0.75);
+  }
 
 </style>
