@@ -22,6 +22,13 @@ const previewMedia = getGalleryMedia(slug).slice(0, 5); // 5 max preview on hove
             <img src={item.src} alt="" loading="lazy" class="gallery-preview-item" data-index={index} />
           )
         ))}
+
+        <div class="preview-indicators">
+        {previewMedia.map((_, index) => (
+          <div class="indicator-square" data-indicator-index={index}></div>
+        ))}
+        </div>
+
       </div>
     )}
 
@@ -74,13 +81,26 @@ const previewMedia = getGalleryMedia(slug).slice(0, 5); // 5 max preview on hove
     let intervalId: number;
     let currentIndex = 0;
     const items = card.querySelectorAll('.gallery-preview-item') as NodeListOf<HTMLElement>;
-    
+    const indicators = card.querySelectorAll('.indicator-square') as NodeListOf<HTMLElement>;
+
     if (items.length === 0) return;
+
+    const updateIndicators = (index: number) => {
+      indicators.forEach((ind, i) => {
+        if (i === index) {
+          ind.classList.add('active');
+        } else {
+          ind.classList.remove('active');
+        }
+      });
+    };
 
     card.addEventListener('mouseenter', () => {
       // Show first item immediately
       items.forEach(el => el.style.opacity = '0');
       items[currentIndex].style.opacity = '1';
+      updateIndicators(currentIndex); // Set first indicator active
+
       if (items[currentIndex].tagName === 'VIDEO') (items[currentIndex] as HTMLVideoElement).play();
 
       // Cycle every few seconds
@@ -89,7 +109,8 @@ const previewMedia = getGalleryMedia(slug).slice(0, 5); // 5 max preview on hove
         items[currentIndex].style.opacity = '0';
         
         currentIndex = (currentIndex + 1) % items.length;
-        
+        updateIndicators(currentIndex);
+
         items[currentIndex].style.opacity = '1';
         if (items[currentIndex].tagName === 'VIDEO') (items[currentIndex] as HTMLVideoElement).play();
       }, 3000);
@@ -106,7 +127,9 @@ const previewMedia = getGalleryMedia(slug).slice(0, 5); // 5 max preview on hove
           vid.currentTime = 0;
         }
       });
+
       currentIndex = 0;
+      updateIndicators(currentIndex);
     });
   });
 </script>
@@ -220,5 +243,37 @@ const previewMedia = getGalleryMedia(slug).slice(0, 5); // 5 max preview on hove
   flex-direction: column;
   justify-content: flex-end; 
 }
+
+
+/* Gallery slideshow preview indicators */
+.preview-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .project-card:hover .preview-indicators {
+    opacity: 1;
+  }
+
+  .indicator-square {
+    width: 5px;
+    height: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: background-color 0.15s ease-in-out;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  }
+
+  .indicator-square.active {
+    background-color: rgba(255, 255, 255, 0.75);
+  }
 
 </style>
