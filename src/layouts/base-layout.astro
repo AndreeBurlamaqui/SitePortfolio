@@ -57,6 +57,10 @@ const canonicalURL = new URL(currentPath, siteBase);
             <i class="fa-solid fa-code"></i> Projects
           </a>
 
+          <a href="/arcade-defense" class:list={["nav-item", currentPath.includes("/arcade-defense") && "active"]}>
+            <i class="fa-solid fa-gamepad"></i> Arcade Defense
+          </a>
+
           <a href="/resume" class={`nav-item ${currentPath.includes('/resume') ? 'active' : ''}`}>
             <i class="fa-solid fa-file-lines"></i> CV / Resume
           </a>

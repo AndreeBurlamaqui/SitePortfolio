@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/base-layout.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout title="Arcade Defense - Portfolio">
+  <section class="arcade-page">
+    <header class="arcade-heading">
+      <div>
+        <p class="eyebrow">BROWSER GAME</p>
+        <h1>Arcade Defense</h1>
+        <p>Play the arcade shooter directly in your browser.</p>
+      </div>
+      <a class="open-game" href="/games/arcade-defense/" target="_blank" rel="noreferrer">Open game in a new tab</a>
+    </header>
+    <div class="game-frame">
+      <iframe
+        src="/games/arcade-defense/"
+        title="Arcade Defense browser game"
+        allow="fullscreen"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <p class="game-help">Click inside the game to use the keyboard. Move with the arrow keys or A/D; fire with Space.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .arcade-page { width: 100%; max-width: 1120px; margin: 0 auto; }
+  .arcade-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1rem; }
+  .eyebrow { margin: 0 0 .4rem; color: #718096; font-size: .72rem; font-weight: 700; letter-spacing: .12em; }
+  h1 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+  .arcade-heading p:not(.eyebrow) { margin: .5rem 0 0; color: #687386; }
+  .open-game { flex: none; color: #222; font-weight: 600; }
+  .game-frame { width: 100%; overflow: hidden; border: 1px solid #d9dee7; border-radius: 12px; background: #050816; box-shadow: 0 12px 36px #1112; }
+  iframe { display: block; width: 100%; height: min(1120px, calc(75vw + 250px)); min-height: 560px; border: 0; }
+  .game-help { margin: .8rem 0 0; color: #687386; font-size: .9rem; }
+  @media (max-width: 650px) {
+    .arcade-heading { align-items: start; flex-direction: column; gap: .8rem; }
+    iframe { height: max(560px, calc(75vw + 160px)); min-height: 0; }
+  }
+</style>

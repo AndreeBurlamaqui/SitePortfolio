@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050816">
+  <title>Arcade Defense</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="stats" aria-live="polite">
+        <div><span class="label">SCORE</span><strong id="score">000000</strong></div>
+        <div><span class="label">HIGH SCORE</span><strong id="high-score">000000</strong></div>
+        <div><span class="label">WAVE</span><strong id="wave">01</strong></div>
+      </div>
+    </header>
+    <section class="screen" aria-label="Space Invaders game">
+      <canvas id="game" width="800" height="600" aria-label="Game canvas"></canvas>
+      <div class="overlay" id="overlay">
+        <p class="eyebrow">EARTH DEFENSE SYSTEM</p>
+        <h1 id="overlay-title"></h1>
+        <p id="overlay-copy">Fight through endless waves. Gas refills at the start of each wave.</p>
+        <button id="start-button" type="button">START GAME</button>
+      </div>
+    </section>
+    <footer class="bottom-ui" aria-label="Game status and controls">
+      <section class="resources" aria-label="Resources">
+        <div class="resource fuel-stat"><span class="label">GAS</span><div class="fuel-gauge" role="meter" aria-label="Remaining gas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><span class="empty-mark">E</span><div class="fuel-track"><div id="fuel-fill"></div></div></div></div>
+        <div class="resource"><span class="label">LIVES</span><strong id="lives" aria-label="3 lives"></strong></div>
+      </section>
+      <section class="controls" aria-label="Controls">
+        <div class="control-group">
+          <span class="control-label">MOVE</span>
+          <div class="control-sprites"><kbd data-move-key="left"><img src="Textures/Inputs/left_arrow_icon.png" alt="Left arrow"></kbd><kbd data-move-key="right"><img src="Textures/Inputs/right_arrow_icon.png" alt="Right arrow"></kbd><span>or</span><kbd data-move-key="left"><img src="Textures/Inputs/a_icon.png" alt="A key"></kbd><kbd data-move-key="right"><img src="Textures/Inputs/d_icon.png" alt="D key"></kbd></div>
+        </div>
+        <div class="control-group fire-group">
+          <span class="control-label">FIRE</span>
+          <div class="control-sprites"><kbd class="space-key"><img src="Textures/Inputs/spacebar_left_icon.png" alt=""><img src="Textures/Inputs/spacebar_center_icon.png" alt=""><img src="Textures/Inputs/spacebar_right_icon.png" alt=""></kbd></div>
+        </div>
+      </section>
+    </footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
