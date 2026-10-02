@@ -126,6 +126,7 @@
 
   function newWave() {
     keys.clear(); syncMovementIndicators();
+    formationX = 0;
     enemies = [];
     const cols = wave===1 ? 4 : Math.min(11,4+wave);
     const rows = wave===1 ? 3 : Math.min(5,3+Math.floor((wave-2)/2));
@@ -139,7 +140,6 @@
     direction = 1;
     enemySpeed = Math.min(TUNING.enemySpeedCap,TUNING.enemyBaseSpeed+(wave-1)*TUNING.enemySpeedPerWave);
     shots = []; enemyShots = [];
-    formationX = 0;
     enemyFireCooldown = wave===1?TUNING.waveOneEnemyFireDelay:1.1;
     diveCooldown = wave===1?TUNING.waveOneFirstDiveDelay:wave===2?TUNING.waveTwoFirstDiveDelay:TUNING.enemyDiveInterval;
     state = 'waveIntro';
@@ -207,6 +207,8 @@
     enemy.entryDelay=delay;
     enemy.entryStartX=startX;
     enemy.entryStartY=startY;
+    enemy.entryTargetX=enemy.homeX+formationX;
+    enemy.entryTargetY=enemy.homeY;
     enemy.entryScale=TUNING.waveEntryStartScale;
     enemy.x=startX;
     enemy.y=enemy.entryStartY;
@@ -217,12 +219,11 @@
     enemy.entryElapsed+=dt;
     const progress=Math.min(1,enemy.entryElapsed/TUNING.waveEntryDuration);
     const easeOut=1-Math.pow(1-progress,3);
-    const targetX=enemy.homeX+formationX;
-    enemy.x=enemy.entryStartX+(targetX-enemy.entryStartX)*easeOut;
-    enemy.y=enemy.entryStartY+(enemy.homeY-enemy.entryStartY)*easeOut;
+    enemy.x=enemy.entryStartX+(enemy.entryTargetX-enemy.entryStartX)*easeOut;
+    enemy.y=enemy.entryStartY+(enemy.entryTargetY-enemy.entryStartY)*easeOut;
     enemy.entryScale=TUNING.waveEntryStartScale+(1-TUNING.waveEntryStartScale)*easeOut;
     if (progress>=1) {
-      enemy.x=targetX; enemy.y=enemy.homeY; enemy.entryScale=1; enemy.mode='formation';
+      enemy.x=enemy.entryTargetX; enemy.y=enemy.entryTargetY; enemy.entryScale=1; enemy.mode='formation';
     }
   }
   function update(dt) {
@@ -252,7 +253,8 @@
     // The formation only sweeps sideways and never descends. Slots are measured
     // from every living invader, so a diver's place is kept until it returns.
     const activeEnemies = enemies.filter(enemy=>enemy.alive);
-    formationX += direction*enemySpeed*dt;
+    const returningEntry=activeEnemies.some(enemy=>enemy.mode==='entering');
+    if (!returningEntry) formationX += direction*enemySpeed*dt;
     const leftEdge = Math.min(...activeEnemies.map(enemy=>enemy.homeX))+formationX;
     const rightEdge = Math.max(...activeEnemies.map(enemy=>enemy.homeX+enemy.w))+formationX;
     if (leftEdge<12 || rightEdge>W-12) {
