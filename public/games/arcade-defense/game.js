@@ -92,6 +92,7 @@
     waveEntryRowDelay: 0.12,
     waveEntryColumnDelay: 0.035,
     waveEntryStartScale: 0.32,
+    waveEntryGrayAmount: 0.45,
   };
   const sprites = {};
   const spritePaths = {
@@ -200,12 +201,12 @@
     }
     if (!hasEnteringEnemies || enemies.every(enemy=>!enemy.alive || enemy.mode==='formation')) state='playing';
   }
-  function beginSlotEntry(enemy,delay,startX) {
+  function beginSlotEntry(enemy,delay,startX,startY=-enemy.h) {
     enemy.mode='entering';
     enemy.entryElapsed=0;
     enemy.entryDelay=delay;
     enemy.entryStartX=startX;
-    enemy.entryStartY=-enemy.h;
+    enemy.entryStartY=startY;
     enemy.entryScale=TUNING.waveEntryStartScale;
     enemy.x=startX;
     enemy.y=enemy.entryStartY;
@@ -301,7 +302,10 @@
         enemy.x = Math.max(12,Math.min(W-12-enemy.w,enemy.diveX+enemy.diveSide*zigzagWidth*zigzag));
         enemy.y += diveSpeed*dt;
         // A diver that misses leaves the bottom and re-enters from the top.
-        if (enemy.y>H) beginSlotEntry(enemy,0,enemy.x);
+        if (enemy.y>H) {
+          const slotX=enemy.homeX+formationX;
+          beginSlotEntry(enemy,0,slotX,-enemy.h);
+        }
       }
       const enemyVelocity = dt > 0 ? (enemy.x-previousEnemyX)/dt : 0;
       const targetTilt = -Math.max(-1,Math.min(1,enemyVelocity/TUNING.enemyBaseSpeed))*TUNING.shipMaxTiltDegrees;
@@ -385,6 +389,8 @@
     ctx.rotate(facingTilt*Math.PI/180);
     const entryScale=ship.entryScale??1;
     ctx.scale(scaleX*entryScale,scaleY*entryScale);
+    const entryProgress=Math.max(0,Math.min(1,(1-entryScale)/(1-TUNING.waveEntryStartScale)));
+    ctx.filter=`grayscale(${entryProgress*TUNING.waveEntryGrayAmount})`;
     drawSprite(image,-w/2,-h/2,w,h,color);
     ctx.restore();
   }
