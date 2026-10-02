@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro';
 import '../styles/global.css';
+import PromptHistory from '../assets/attachments/arcade-defense/prompt-history.md';
 ---
 
 <BaseLayout title="Arcade Defense - Portfolio">
@@ -22,6 +23,13 @@ import '../styles/global.css';
       ></iframe>
     </div>
     <p class="game-help">Click inside the game to use the keyboard. Move with the arrow keys or A/D; fire with Space.</p>
+    <details class="prompt-history">
+      <summary>Development prompt history</summary>
+      <div class="history-content">
+        <a class="download-history" href="/downloads/arcade-defense-prompt-history.md" download>Download prompt history (.md)</a>
+        <PromptHistory />
+      </div>
+    </details>
   </section>
 </BaseLayout>
 
@@ -35,6 +43,15 @@ import '../styles/global.css';
   .game-frame { width: 100%; overflow: hidden; border: 1px solid #d9dee7; border-radius: 12px; background: #050816; box-shadow: 0 12px 36px #1112; }
   iframe { display: block; width: 100%; height: min(1120px, calc(75vw + 250px)); min-height: 560px; border: 0; }
   .game-help { margin: .8rem 0 0; color: #687386; font-size: .9rem; }
+  .prompt-history { margin-top: 2rem; border: 1px solid #d9dee7; border-radius: 10px; background: #fff; }
+  .prompt-history summary { padding: 1rem 1.2rem; cursor: pointer; font-weight: 700; }
+  .history-content { max-height: 70vh; overflow: auto; padding: 0 1.2rem 1.2rem; border-top: 1px solid #e7eaf0; color: #30394a; line-height: 1.6; }
+  .download-history { display: inline-block; margin: 1rem 0; color: #222; font-weight: 700; }
+  .history-content :global(h1) { font-size: 1.6rem; }
+  .history-content :global(h2) { margin-top: 2rem; font-size: 1.25rem; }
+  .history-content :global(h3) { margin-top: 1.4rem; font-size: 1rem; }
+  .history-content :global(blockquote) { margin-left: 0; padding-left: 1rem; border-left: 3px solid #cbd5e1; color: #4b5563; }
+  .history-content :global(code) { overflow-wrap: anywhere; }
   @media (max-width: 650px) {
     .arcade-heading { align-items: start; flex-direction: column; gap: .8rem; }
     iframe { height: max(560px, calc(75vw + 160px)); min-height: 0; }
